@@ -1,0 +1,74 @@
+.panel-default{
+	border-top: 1px solid #ff0000;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.panel-heading{
+	height: 30px;
+    line-height: 30px;
+    color: #333;
+    padding: 0px 15px;
+}
+.panel-body{
+	padding: 0px 10px;
+}
+.corporation{
+	padding: 15px 0px;
+} 
+.corporation h3{
+	margin-bottom: 15px;
+}
+.corporation p a{
+	margin-left: 15px;
+}
+.main_product{
+	padding: 15px 0px;	
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.main_product p{
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.main_product p:last-child{
+	margin-bottom: 0px;	
+}
+.contact{
+	padding: 15px 0px;	
+    text-align: center;
+}
+.contact li{
+	background-color: #ff0000;
+	height: 30px;
+	line-height: 30px;
+}
+.contact a{
+	display: block;
+	color: #ffffff;
+}
+.golfh2{
+	height: 30px;
+    line-height: 30px;
+    color: #333;
+}
+.product_type{
+	list-style-image: url('../images/icon.png');
+	padding-left: 25px;
+}
+.product_type li {
+    margin-bottom: 4px;
+}
+.product_type li {
+    line-height: 25px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+.product_type a{
+    color: #696969;
+    border-bottom: 1px dashed #e7e7e7;
+}
+.product_type a:hover{
+	text-decoration: none;
+	color: #ff0000;
+}
