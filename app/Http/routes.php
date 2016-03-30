@@ -29,3 +29,20 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::group(['prefix' => 'product'], function()
+{
+    Route::get('list.json', 'ProductController@getList');
+    Route::get('{id}.json', 'ProductController@getProduct');
+    Route::post('create.json', 'ProductController@postProduct');
+    Route::put('{id}.json', 'ProductController@putProduct');
+});
+
+Route::group(['prefix' => 'news'], function()
+{
+    Route::get('list.json', 'NewsController@getNewsList');
+    Route::get('{id}.json', 'NewsController@getNews');
+    Route::post('create.json', 'NewsController@postNews');
+    Route::put('{id}.json', 'NewsController@putNews');
+});
+
