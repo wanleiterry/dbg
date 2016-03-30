@@ -1,0 +1,164 @@
+h1,h2,h3,h4,h5,h6,p,ul{
+	padding: 0px;
+	margin: 0px;
+}
+a,a:hover{
+	text-decoration: none;
+	cursor: pointer;
+}
+/*顶部共用部分*/
+.container-fluid{
+	padding: 0px;
+}
+.top p{    
+	font-size: 12px;
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
+.company_info h2{
+	font-weight: bolder;
+	margin-bottom: 5px;
+}
+.connect_us span{
+	font-size: 34px;
+	height: 64px;
+	line-height: 64px;
+}
+.connect_us img{
+	width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+}
+.navgation{
+	background-color: #ff0000;
+	height: 40px;
+}
+.navbar-collapse{
+	height: 40px;
+}
+.navbar-nav li,.navbar-nav li a{
+	height: 40px;
+	line-height: 40px;
+}
+.nav>li>a{
+	padding: 0px 15px;
+}
+.navgation .container{
+	padding: 0px;
+}
+.nav a{
+	color:#ffffff;
+}
+.web_nav{
+	height: 40px;
+	line-height: 40px;
+}
+.f-bold{
+	color: #696969;
+}
+.web_nav .list-inline{
+	padding: 5px 0px;	
+}
+.web_nav .list-inline li{
+	background-color: #ff0000;
+	height: 30px;
+	line-height: 30px;
+}
+.web_nav .list-inline li a{
+	display: block;
+	color: #ffffff;
+}
+/*左侧共用部分*/
+.panel-default{
+	border-top: 1px solid #ff0000;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.panel-heading{
+	height: 30px;
+    line-height: 30px;
+    color: #333;
+    padding: 0px 15px;
+}
+.panel-body{
+	padding: 0px 10px;
+}
+.corporation{
+	padding: 15px 0px;
+} 
+.corporation h3{
+	margin-bottom: 15px;
+}
+.corporation p a{
+	margin-left: 15px;
+}
+.main_product{
+	padding: 15px 0px;	
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999;
+}
+.main_product p{
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+.main_product p:last-child{
+	margin-bottom: 0px;	
+}
+.contact{
+	padding: 15px 0px;	
+    text-align: center;
+}
+.contact li{
+	background-color: #ff0000;
+	height: 30px;
+	line-height: 30px;
+}
+.contact a{
+	display: block;
+	color: #ffffff;
+}
+.golfh2{
+	height: 30px;
+    line-height: 30px;
+    color: #333;
+}
+.product_type{
+	list-style-image: url('../images/icon.png');
+	padding-left: 25px;
+}
+.product_type li {
+    margin-bottom: 4px;
+}
+.product_type li {
+    line-height: 25px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+}
+.product_type a{
+    color: #696969;
+    border-bottom: 1px dashed #e7e7e7;
+}
+.product_type a:hover{
+	text-decoration: none;
+	color: #ff0000;
+}
+/*底部共用部分*/
+#bottom .container-fluid{
+	background-color: #ff0000;
+	height: 45px;
+	line-height: 45px;
+}
+#bottom .list-inline{
+	text-align: center;
+	color: #ffffff;
+}
+#bottom .list-inline li a{
+	color: #ffffff;
+}
+#bottom .company_address{
+	padding: 15px;
+}
+#bottom .company_address p:first-child{
+	margin-bottom: 15px;
+}

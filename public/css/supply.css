@@ -1,0 +1,44 @@
+.supply{
+	margin-bottom: 15px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+.supply_title{
+	height: 30px;
+	line-height: 30px;
+	background-color: #f3f3f3;
+	border-bottom: 1px solid #999;
+}
+.supply_title span{
+	width: 100px;
+	text-align: center;
+	background-color: #ffffff;
+	border-top: 2px solid #ff0000;
+}
+.supply_title a{
+	padding-right: 15px;
+}
+.supply_main{
+	padding: 20px;
+}
+.supply_main ul{
+	border-bottom: 1px solid #ddd;
+}
+.supply_main li{
+	width: 24%;
+	height: 25px;
+	line-height: 25px;
+	margin-bottom: 10px;
+}
+.supply_new{
+	padding: 20px;
+	border-bottom: 1px solid #ddd;
+}
+.record{
+	margin: 20px 0px; 
+}
+.record p{
+	height: 30px;
+	line-height: 30px;
+}
