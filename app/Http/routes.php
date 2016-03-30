@@ -29,3 +29,9 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     //
 });
+
+Route::group(['prefix'=>'user'],function(){
+	Route::get('afficheList','Affiche\AfficheController@afficheList');
+	Route::get('afficheInfo','Affiche\AfficheController@afficheInfo');
+	Route::get('indexAffichePic','Affiche\AfficheController@indexAffichePic');
+});
