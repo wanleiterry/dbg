@@ -61,4 +61,6 @@ Route::group(['prefix' => 'feedback'], function()
 	Route::put('{id}.json', 'FeedbackController@putFeedback');
 });
 
+Route::get('company.json', 'CompanyController@getCompany');
+Route::put('company.json', 'CompanyController@putCompany');
 

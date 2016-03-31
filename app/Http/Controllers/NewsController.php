@@ -31,9 +31,9 @@ class NewsController extends Controller {
         return Response::json($result, 200);
     }
 
-    public function putNews(Request $request)
+    public function putNews($id, Request $request)
     {
-        $result = $this->newsService->put($request->all());
+        $result = $this->newsService->put($id, $request->all());
         return Response::json($result, 200);
     }
 

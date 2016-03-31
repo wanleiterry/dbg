@@ -31,9 +31,9 @@ class FeedbackController extends Controller {
         return Response::json($result, 200);
     }
 
-    public function putFeedback(Request $request)
+    public function putFeedback($id, Request $request)
     {
-        $result = $this->feedbackService->put($request->all());
+        $result = $this->feedbackService->put($id, $request->all());
         return Response::json($result, 200);
     }
 

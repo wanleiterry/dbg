@@ -17,12 +17,14 @@ class ProductService {
     {
     	$offset = isset($params['offset']) ? $params['offset'] : $this->offset;
     	$limit = isset($params['limit']) ? $params['limit'] : $this->limit;
-        $products = Product::skip($offset)->take($limit)->get();dd($products);
+        $products = Product::skip($offset)->take($limit)->get();//dd($products);
+        return $products;
     }
 
     public function get($id)
     {
         $product = Product::where('id', $id)->first();dd($product);
+        return $product;
     }
 
     public function post($params)
