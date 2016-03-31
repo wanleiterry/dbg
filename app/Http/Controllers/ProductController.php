@@ -28,9 +28,9 @@ class ProductController extends Controller {
         $result = $this->productService->post($request->all());
     }
 
-    public function putProduct(Request $request)
+    public function putProduct($id, Request $request)
     {
-        $result = $this->productService->put($request->all());
+        $result = $this->productService->put($id, $request->all());
     }
 
 }
