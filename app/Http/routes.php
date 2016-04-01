@@ -26,11 +26,23 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    //
+// Route::group(['middleware' => ['web']], function () {
+//     //
+// });
+
+Route::group(['prefix' => 'auth'], function () {
+	$Auth = 'Auth\AuthController@';
+	//登录接口
+	Route::post('login.json', $Auth . 'postLogin');
+	//登出
+	Route::get('logout', $Auth . 'getLogout');
+	Route::get('logout.json', $Auth . 'getLogout');
+	//登录
+	Route::get('login', $Auth . 'getLogin');
 });
 
-Route::group(['prefix' => 'admin'], function()
+//管理员
+Route::group(['prefix' => 'admin', 'middleware' => 'auth.api'], function()
 {
     //管理员信息
 	Route::get('user.json', 'UserController@showUser');
@@ -57,18 +69,21 @@ Route::group(['prefix' => 'admin'], function()
     Route::put('case/{id}.json', 'AnliController@putAnli');
 });
 
+//产品
 Route::group(['prefix' => 'product'], function()
 {
     Route::get('list.json', 'ProductController@getProductList');
     Route::get('{id}.json', 'ProductController@getProduct');
 });
 
+//新闻
 Route::group(['prefix' => 'news'], function()
 {
     Route::get('list.json', 'NewsController@getNewsList');
     Route::get('{id}.json', 'NewsController@getNews');
 });
 
+//留言
 Route::group(['prefix' => 'feedback'], function()
 {
 	Route::get('list.json', 'FeedbackController@getFeedbackList');
@@ -77,14 +92,17 @@ Route::group(['prefix' => 'feedback'], function()
 //	Route::put('{id}.json', 'FeedbackController@putFeedback');
 });
 
+//公司
 Route::get('company.json', 'CompanyController@getCompany');
 
+//分类
 Route::group(['prefix' => 'cate'], function()
 {
     Route::get('list.json', 'CategoryController@getCategoryList');
     Route::get('{id}.json', 'CategoryController@getCategory');
 });
 
+//案例
 Route::group(['prefix' => 'case'], function()
 {
     Route::get('list.json', 'AnliController@getAnliList');

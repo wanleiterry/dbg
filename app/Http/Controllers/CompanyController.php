@@ -19,9 +19,9 @@ class CompanyController extends Controller
         return Response::json($result, 200);
     }
 
-    public function putCompany($id, Request $request)
+    public function putCompany(Request $request)
     {
-        $result = $this->companyService->put($id, $request->all());
+        $result = $this->companyService->put($request->all());
         return Response::json($result, 200);
     }
    

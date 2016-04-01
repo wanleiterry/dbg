@@ -3,9 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\AnliService;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller {
+class AnliController extends Controller {
 
     public function __construct(AnliService $anliService)
     {

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\ProductService;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller {

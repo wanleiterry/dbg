@@ -45,7 +45,20 @@ class NewsService {
 
     public function put($id, $params)
     {
-        if(Product::where('id', $id)->update($params)) {
+    	$upd = array();
+    	if(isset($params['title'])) {
+    		$upd['title'] = $params['title'];
+    	}
+    	if(isset($params['pic'])) {
+    		$upd['pic'] = $params['pic'];
+    	}
+    	if(isset($params['content'])) {
+    		$upd['content'] = $params['content'];
+    	}
+    	if(isset($params['desc'])) {
+    		$upd['desc'] = $params['desc'];
+    	}
+        if(News::where('id', $id)->update($upd)) {
             return array('status' => true);
         } else {
             return array('status' => false, 'result' => '修改失败');

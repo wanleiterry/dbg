@@ -17,13 +17,15 @@ class ProductService {
     {
     	$offset = isset($params['offset']) ? $params['offset'] : $this->offset;
     	$limit = isset($params['limit']) ? $params['limit'] : $this->limit;
-        $products = Product::skip($offset)->take($limit)->get();//dd($products);
-        return $products;
+    	$data['_count'] = $this->model->count();
+        $products = $this->model->skip($offset)->take($limit)->get();
+        $data['data'] = $products;
+        return $data;
     }
 
     public function get($id)
     {
-        $product = Product::where('id', $id)->first();dd($product);
+        $product = $this->model->where('id', $id)->first();
         return $product;
     }
 
@@ -36,7 +38,7 @@ class ProductService {
 		$ins['pic'] = isset($params['pic']) ? $params['pic'] : '';
 		$ins['content'] = isset($params['content']) ? $params['content'] : '';
 		$ins['desc'] = isset($params['desc']) ? $params['desc'] : '';
-		if(Product::create($ins)) {
+		if($this->model->create($ins)) {
 			return array('status' => true);
 		} else {
 			return array('status' => false, 'result' => '创建失败');
@@ -45,7 +47,20 @@ class ProductService {
 
     public function put($id, $params)
     {
-		if(Product::where('id', $id)->update($params)) {
+    	$upd = array();
+    	if(isset($params['name'])) {
+    		$upd['name'] = $params['name'];
+    	}
+    	if(isset($params['pic'])) {
+    		$upd['pic'] = $params['pic'];
+    	}
+    	if(isset($params['content'])) {
+    		$upd['content'] = $params['content'];
+    	}
+    	if(isset($params['desc'])) {
+    		$upd['desc'] = $params['desc'];
+    	}
+		if($this->model->where('id', $id)->update($upd)) {
 			return array('status' => true);
 		} else {
 			return array('status' => false, 'result' => '修改失败');

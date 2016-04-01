@@ -22,13 +22,31 @@ class CompanyService {
         return $company;
     }
 
-    public function put($id, $params)
+    public function put($params)
     {
-        if(Company::where('id', $id)->update($params)) {
-            return array('status' => true);
-        } else {
-            return array('status' => false, 'result' => '修改失败');
-        }
+    	$company = $this->model->select('id')->first();
+    	if($company) {
+    		$upd = array();
+	    	if(isset($params['name'])) {
+	    		$upd['name'] = $params['name'];
+	    	}
+	    	if(isset($params['email'])) {
+	    		$upd['email'] = $params['email'];
+	    	}
+	    	if(isset($params['telephone'])) {
+	    		$upd['telephone'] = $params['telephone'];
+	    	}
+	    	if(isset($params['address'])) {
+	    		$upd['address'] = $params['address'];
+	    	}
+	        if(Company::where('id', $company->id)->update($upd)) {
+	            return array('status' => true);
+	        } else {
+	            return array('status' => false, 'result' => '修改失败');
+	        }
+    	} else {
+    		return array('status' => false, 'result' => '公司不存在');
+    	}
     }
 
 }
