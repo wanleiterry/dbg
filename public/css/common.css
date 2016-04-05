@@ -33,7 +33,7 @@ a,a:hover{
 	background-color: #ff0000;
 	height: 40px;
 }
-.navbar-collapse{
+.navgation .navbar-collapse{
 	height: 40px;
 }
 .navbar-nav li,.navbar-nav li a{

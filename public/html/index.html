@@ -14,15 +14,15 @@
 	<div id="header"></div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3 col-sm-3" id="left"></div>
-			<div class="col-md-9 col-sm-9">
+			<div class="col-md-3 col-sm-3 hidden-xs" id="left"></div>
+			<div class="col-md-9 col-sm-9 col-xs-12">
 				<div class="company">
 					<div class="introduce">
 						<span class="pull-left">公司简介</span>
 						<a href="about.html" class="pull-right">更多></a>
 						<div class="clearfix"></div>
 					</div>
-					<div class="introduce_main hidden-xs">
+					<div class="introduce_main">
 						<div class="company_pic">
 							<span>
 			            		<img src="../images/company.jpg" width="200" alt="大表哥有点公司">
@@ -40,70 +40,6 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="product_new row">
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
-						<div class="col-md-3 col-sm-3 col-xs-6">
-							<div class="thumbnail">
-						      	<img src="../images/company.jpg" alt="...">
-						      	<div class="caption">
-						        	<p class="text-center">玻璃钢模具</p>
-						      </div>
-						    </div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -117,4 +53,15 @@
 <script type="text/javascript">$("#header").load("top.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
+<script>
+	var str='';
+	for(var i=0;i<10;i++){
+		str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+		str+='<div class="thumbnail">';
+		str+='<img src="../images/company.jpg" alt="...">';
+		str+='<div class="caption"><p class="text-center">玻璃钢模具</p>';
+		str+='</div></div></div>';
+	}
+	$('.product_new').html(str);
+</script>
 </html>
