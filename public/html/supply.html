@@ -103,14 +103,23 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
-    var str='';
-    for(var i=0;i<10;i++){
-        str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-        str+='<div class="thumbnail">';
-        str+='<img src="../images/company.jpg" alt="...">';
-        str+='<div class="caption">';
-        str+='<p class="text-center">玻璃钢模具</p></div></div></div>';
-    }
-    $("#supply_list").html(str);
+    $.ajax({
+        url: 'case/list.json',
+        type: "post",
+        dataType: "json",
+        data: '',
+        success: function(data){
+            console.log(data);
+            var str='';
+            for(var i=0;i<10;i++){
+                str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+                str+='<div class="thumbnail">';
+                str+='<img src="../images/company.jpg" alt="...">';
+                str+='<div class="caption">';
+                str+='<p class="text-center">玻璃钢模具</p></div></div></div>';
+            }
+            $("#supply_list").html(str);
+        }
+    }); 
 </script>
 </html>

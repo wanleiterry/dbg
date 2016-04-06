@@ -63,12 +63,23 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
-	var str = "";
-	for(var i=0;i<8;i++){
-		str+='<li><a href="news_detail.html">室外装修最新公告';
-		str+='<span class="pull-right">2016.03.01</span>';
-		str+='<div class="clearfix"></div></a></li>';
-	}
-	$('#newslist').html(str);
+	$(function(){
+		$.ajax({
+			url: 'news/list.json',
+			type: "post",
+			dataType: "json",
+			data: '',
+			success: function(data){
+				console.log(data);
+				var str = "";
+				for(var i=0;i<8;i++){
+					str+='<li><a href="news_detail.html">室外装修最新公告';
+					str+='<span class="pull-right">2016.03.01</span>';
+					str+='<div class="clearfix"></div></a></li>';
+				}
+				$('#newslist').html(str);
+			}
+		});	
+	})
 </script>
 </html>

@@ -154,4 +154,15 @@
 <script type="text/javascript">$("#header").load("top.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
+<script>
+    $.ajax({
+        url: 'company.json',
+        type: "post",
+        dataType: "json",
+        data: '',
+        success: function(data){
+            console.log(data);
+        }
+    }); 
+</script>
 </html>
