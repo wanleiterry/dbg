@@ -16,8 +16,8 @@ class CompanyService {
     public function get()
     {
         $company = $this->model->leftJoin('user', 'company.user_id', '=', 'user.id')
-                    ->select('company.id', 'company.name', 'company.email as cEmail', 'company.telephone', 'company.address',
-                        'user.mobile', 'user.email as uEmail', 'user.realname')
+                    ->select('company.id', 'company.name', 'company.email as cEmail', 'company.telephone', 'company.tax', 'company.address',
+                        'company.postcode', 'company.desc', 'user.mobile', 'user.email as uEmail', 'user.realname')
                     ->first();//dd($company);
         return $company;
     }
@@ -36,8 +36,17 @@ class CompanyService {
 	    	if(isset($params['telephone'])) {
 	    		$upd['telephone'] = $params['telephone'];
 	    	}
+	    	if(isset($params['tax'])) {
+	    		$upd['tax'] = $params['tax'];
+	    	}
+	    	if(isset($params['postcode'])) {
+	    		$upd['postcode'] = $params['postcode'];
+	    	}
 	    	if(isset($params['address'])) {
 	    		$upd['address'] = $params['address'];
+	    	}
+	    	if(isset($params['desc'])) {
+	    		$upd['desc'] = $params['desc'];
 	    	}
 	        if(Company::where('id', $company->id)->update($upd)) {
 	            return array('status' => true);
