@@ -28,7 +28,7 @@
 				        </colgroup>
 				        <thead>
 					        <tr>
-					            <th><input type="checkbox" ng-model="goods.checkedAll" class="ng-pristine ng-valid ng-touched" style=""></th>
+					            <th><input type="checkbox" class="delall"></th>
 					            <th></th>
 					            <th>商品</th>
 					            <th>价格</a></th>
@@ -40,7 +40,42 @@
 				        </thead>
 				        <tbody id="goods-list">
 					        
-				        </tbody>
+				        </tbody>				        
+				    </table>
+				    <table class="table">
+				    	<tbody>
+				    		<tr>
+				    			<td width="10%"><input type="checkbox" class="delall"></td>
+				    			<td width="10%"><a>删除</a></td>
+				    			<td width="80%">
+				    				<div class="pull-left">
+				    					共有<span class="total_num"></span>条数据
+				    				</div>
+				    				<div class="pull-right">
+				    					<nav>
+		                                    <ul class="pagination">
+		                                        <li class="disabled">
+		                                            <a href="#" aria-label="Previous">
+		                                                <span aria-hidden="true">«</span>
+		                                            </a>
+		                                        </li>
+		                                        <li class="active"><a href="#">1</a></li>
+		                                        <li><a href="#">2</a></li>
+		                                        <li><a href="#">3</a></li>
+		                                        <li><a href="#">4</a></li>
+		                                        <li><a href="#">5</a></li>
+		                                        <li>
+		                                            <a href="#" aria-label="Next">
+		                                                <span aria-hidden="true">»</span>
+		                                            </a>
+		                                        </li>
+		                                    </ul>
+		                                </nav>
+				    				</div>
+				    				<div class="clearfix"></div>
+				    			</td>
+				    		</tr>
+				    	</tbody>
 				    </table>
 				</tbody>
 			</table>
@@ -59,6 +94,7 @@
         dataType: "json",
         data: '',
 		success: function(data){
+			$('.total_num').html(''+data._count+'');
 			var json=data.data;
             var str='';
             for(var i=0;i<json.length;i++){
@@ -70,10 +106,28 @@
 				str+='<td><p>￥0.01</p></td>';
 				str+='<td><p>8991</p></td>';
 				str+='<td>8</td><td>2016-04-06 11:16:45</td>';
-				str+='<td><p><a> 编辑</a><span>|</span><a>删除</a></p></td></tr>';
+				str+='<td><p><a> 编辑</a><span>|</span><a onclick="delgoods('+json[i].id+')">删除</a></p></td></tr>';
             }
             $('#goods-list').html(str);
         }
-	})
+	});
+	function delgoods(id){
+		console.log(id);
+		if(window.confirm('你确定要删除选中的产品吗？')){
+			//alert("确定");
+			$.ajax({
+				url: '/admin/product/'+id+'.json',
+				type:"delete",
+				dataType:"json",
+				data:'',
+				success:function(data){
+					console.log(data);
+				}
+			});
+		}
+		else{
+			return false;
+		}	
+	}
 </script>
 </html>

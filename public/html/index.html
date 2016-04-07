@@ -23,11 +23,6 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="introduce_main">
-						<div class="company_pic">
-							<span>
-			            		<img src="../images/company.jpg" width="200" alt="大表哥有点公司">
-			        		</span>
-			        	</div>
 			        	<div class="company_info">
 					        <p>台州亿恒装饰——是浙江知名的装饰材料生产商。始创于90年代初，是一家集设计、生产、施工于一体的多元化公司。本公司拥有一支超强的团队，精湛的技术，犹如鬼斧神工，雕刻出一幅幅栩栩如生的艺术。亿恒公司不仅是中国GRC协会的会员单位、中国建筑装饰协会的会员单位、而且在业内率先通过ISO9001:2008国际质量管理体系认证，荣膺“全国GRC产品30家市场放心品牌”称号，并应邀参加上海世博会民企联合馆活动，享誉中外。 </p>
 				        </div>
@@ -45,6 +40,28 @@
 			</div>
 		</div>
 	</div>
+	<div class="modal fade detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">      
+            <div class="modal-content">  
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4>案例展示</h4>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <p class="title"></p>
+                        <p class="time"></p>
+                    </div>
+                    <div class="panel-body" style="margin-top: 25px;">
+                        <div class="thumbnail">
+                            <img src="">
+                            <div class="caption"><p></p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<div id="bottom"></div>
 </div>
 </body>
@@ -54,14 +71,48 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
-	var str='';
-	for(var i=0;i<10;i++){
-		str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-		str+='<div class="thumbnail">';
-		str+='<img src="../images/company.jpg" alt="...">';
-		str+='<div class="caption"><p class="text-center">玻璃钢模具</p>';
-		str+='</div></div></div>';
-	}
-	$('.product_new').html(str);
+	function showdetail(id){
+        $.ajax({
+            url:'/case/'+id+'.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                console.log(data);
+                $('.title').html(''+data.name+'');
+                $('.panel-heading .time').html(''+data.created_at+'');
+                $('.panel-body img').attr("src",""+data.pic+"");
+                $('.panel-body .caption p').html(''+data.content+'');
+            }
+        })
+    }	
+	$.ajax({
+        url: '/company.json',
+        type: "get",
+        dataType: "json",
+        data: '',
+        success: function(data){
+            $('.introduce_main .company-info h3').html(''+data.name+'');
+            $('.introduce_main .company-info p').html(''+data.desc+'');
+        }
+    });
+    $.ajax({
+        url: '/case/list.json',
+        type: "get",
+        dataType: "json",
+        data: '',
+        success: function(data){
+        	console.log(data);
+            var str='';
+			for(var i=0;i<data.length;i++){
+				str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+				str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+data[i].id+')">';
+				str+='<img src="'+data[i].pic+'" alt="...">';
+				str+='<div class="caption"><p class="text-center">'+data[i].title+'</p>';
+				str+='</div></div></div>';
+			}
+			$('.product_new').html(str);
+        }
+    });
 </script>
 </html>

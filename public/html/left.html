@@ -5,7 +5,7 @@
   	<div class="panel-body">
     	<div class="corporation">
     		<h3>大表哥有限公司</h3>
-    		<p>许伟洋<a href="#">查看联系方式</a></p>
+    		<p>许伟洋<a href="connect.html">查看联系方式</a></p>
     	</div>
     	<div class="main_product">
     		<p class="address">
@@ -32,8 +32,7 @@
         <ul class="list-unstyled product_type"></ul>
   	</div>
 </div>
-<script>
-    
+<script>    
     $.ajax({
         url:'/cate/list.json',
         type: "get",
@@ -44,7 +43,7 @@
             for(var i=0;i<data.length;i++){
                 str+=' <li><a href="#" class="golfh2">'+data[i].name+'</a></li>';
             }
-            $('.product_type').html(str)
+            $('.product_type').html(str);
         }
     })
 </script>

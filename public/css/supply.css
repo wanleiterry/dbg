@@ -42,3 +42,9 @@
 	height: 30px;
 	line-height: 30px;
 }
+.thumbnail{
+	cursor: pointer;
+}
+.caption h4{
+	text-align: center;
+}

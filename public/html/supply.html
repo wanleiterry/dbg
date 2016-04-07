@@ -65,7 +65,7 @@
                         </div>
                         <div class="page_select clearfix">
                             <div class="pull-left record">
-                                <p>共<span>236</span>条记录</p>
+                                <p>共<span id='total'>236</span>条记录</p>
                             </div>
                             <div class="pull-right">
                                 <nav>
@@ -91,10 +91,31 @@
                         </div>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
+    <div class="modal fade detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">  
+            <div class="modal-content">      
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4>案例展示</h4>
+                </div>
+                <div class="panel">
+                    <div class="panel-heading">
+                        <p class="title"></p>
+                        <p class="time"></p>
+                    </div>
+                    <div class="panel-body" style="margin-top: 25px;">
+                        <div class="thumbnail">
+                            <img src="">
+                            <div class="caption"><p></p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 	<div id="bottom"></div>
 </div>
 </body>
@@ -104,35 +125,55 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
-    $.ajax({
-        url:'/cate/list.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-            var str='';
-            for(var i=0;i<data.length;i++){
-                str+='<li><a>'+data[i].name+'</a></li>'
+    function showdetail(id){
+        $.ajax({
+            url:'/product/'+id+'.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                console.log(data);
+                $('.title').html(''+data.name+'');
+                $('.panel-heading .time').html(''+data.created_at+'');
+                $('.panel-body img').attr("src",""+data.pic+"");
+                $('.panel-body .caption p').html(''+data.content+'');
             }
-            $('#product_type').html(str)
-        }
+        })
+    }
+    $(function () {
+        $.ajax({
+            url:'/cate/list.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                var str='';
+                for(var i=0;i<data.length;i++){
+                    str+='<li><a>'+data[i].name+'</a></li>'
+                }
+                $('#product_type').html(str)
+            }
+        })
+        $.ajax({
+            url: '/product/list.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                console.log(data);
+                $('#total').html(''+data._count+'');
+                var json=data.data;
+                var str='';
+                for(var i=0;i<json.length;i++){
+                    str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+                    str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
+                    str+='<img src="'+json[i].pic+'" alt="...">';
+                    str+='<div class="caption">';
+                    str+='<h4>'+json[i].name+'</h4><p class="text-center">'+json[i].desc+'</p></div></div></div>';
+                }
+                $("#supply_list").html(str);
+            }
+        }); 
     })
-    $.ajax({
-        url: '/case/list.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-            var str='';
-            for(var i=0;i<data.length;i++){
-                str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-                str+='<div class="thumbnail">';
-                str+='<img src="../images/company.jpg" alt="...">';
-                str+='<div class="caption">';
-                str+='<p class="text-center">玻璃钢模具</p></div></div></div>';
-            }
-            $("#supply_list").html(str);
-        }
-    }); 
 </script>
 </html>
