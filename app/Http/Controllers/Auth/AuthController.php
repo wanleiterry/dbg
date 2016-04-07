@@ -26,12 +26,12 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
+//    /**
+//     * Where to redirect users after login / registration.
+//     *
+//     * @var string
+//     */
+//    protected $redirectTo = '/auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -74,9 +74,7 @@ class AuthController extends Controller
 //     }
 
     public function getLogin() {
-    	\View::addExtension('html', 'php');
-//     	return view()->file('/html/about.html');
-    	return view('about');
+    	return view('admin/login');
     }
     
     public function postLogin() {

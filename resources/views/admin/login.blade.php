@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>项目管理系统后台登录界面模板</title>
+<link rel="stylesheet" type="text/css" href="/admin/css/login.css">
 <style>
 *{
 	padding:0px;
@@ -11,14 +12,14 @@
 
 body{
 	font-family:Arial, Helvetica, sans-serif;
-	background:url(images/grass.jpg);
+	background:url(/admin/images/grass.jpg);
 	font-size:13px;
     
 	}
 img{
 	border:0;
 	}
-.lg{width:468px; height:468px; margin:100px auto; background:url(images/login_bg.png) no-repeat;}
+.lg{width:468px; height:468px; margin:100px auto; background:url(/admin/images/login_bg.png) no-repeat;}
 .lg_top{ height:200px; width:468px;}
 .lg_main{width:400px; height:180px; margin:0 25px;}
 .lg_m_1{
@@ -32,7 +33,7 @@ img{
 	color:#666;
 	width:236px;
 	margin:4px 28px;
-	background:url(images/user.png) no-repeat;
+	background:url(/admin/images/user.png) no-repeat;
 	padding-left:10px;
 	font-size:16pt;
 	font-family:Arial, Helvetica, sans-serif;
@@ -43,12 +44,12 @@ img{
 	color:#666;
 	width:236px;
 	margin:4px 28px;
-	background:url(images/password.png) no-repeat;
+	background:url(/admin/images/password.png) no-repeat;
 	padding-left:10px;
 	font-size:16pt;
 	font-family:Arial, Helvetica, sans-serif;
 }
-.bn{width:330px; height:72px; background:url(images/enter.png) no-repeat; border:0; display:block; font-size:18px; color:#FFF; font-family:Arial, Helvetica, sans-serif; font-weight:bolder;}
+.bn{width:330px; height:72px; background:url(/admin/images/enter.png) no-repeat; border:0; display:block; font-size:18px; color:#FFF; font-family:Arial, Helvetica, sans-serif; font-weight:bolder;}
 .lg_foot{
 	height:80px;
 	width:330px;
@@ -96,9 +97,9 @@ img{
 		        dataType: "json",
 		        data: param,
 		        success:function(data){
-		        	console.log(data);
+//		        	console.log(data);
 		        	if(data.success==true){
-		        		window.location.href='index.html';
+		        		window.location.href='/admin/';
 		        	}
 		        	else{
 
