@@ -156,8 +156,8 @@
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
     $.ajax({
-        url: 'company.json',
-        type: "post",
+        url: '/company.json',
+        type: "get",
         dataType: "json",
         data: '',
         success: function(data){

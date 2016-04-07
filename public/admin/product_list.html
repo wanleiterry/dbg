@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8"/>
 <title>后台管理系统</title>
-<meta name="author" content="DeathGhost" />
 <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
 <link rel="stylesheet" type="text/css" href="css/common.css" />
@@ -11,13 +10,69 @@
 <body>
 <div id="header"></div>
 <div class="main clearfix">
-  <div id="left"></div>
-  <div class="rt_wrap content mCustomScrollbar">
-  </div>
+  	<div id="left"></div>
+  	<div class="rt_wrap content mCustomScrollbar">
+  		<div class="table-responsive">
+			<table class="table">
+				<tbody>
+					<table class="table table-hover goods-list">
+				        <colgroup>
+				            <col class="cell-cb">
+				            <col width="80">
+				            <col width="320">
+				            <col>
+				            <col>
+				            <col>
+				            <col class="cell-datetime">
+				            <col width="200">
+				        </colgroup>
+				        <thead>
+					        <tr>
+					            <th><input type="checkbox" ng-model="goods.checkedAll" class="ng-pristine ng-valid ng-touched" style=""></th>
+					            <th></th>
+					            <th>商品</th>
+					            <th>价格</a></th>
+					            <th><a>库存</a></th>
+					            <th><a>销量</a></th>
+					            <th><a>发布时间</a></th>
+					            <th>管理</th>
+					        </tr>
+				        </thead>
+				        <tbody>
+					        
+				        </tbody>
+				    </table>
+				</tbody>
+			</table>
+		</div>
+  	</div>
 </div>
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
+<script>
+	$.ajax({
+		url:'/product/list.json',
+        type: "get",
+        dataType: "json",
+        data: '',
+		success: function(data){
+            var str='';
+            for(var i=0;i<data.length;i++){
+				console.log(data[i])
+                str+='<tr><td><input type="checkbox"></td>';
+				str+='<td><img class="goods-image" src="http://7xk9pc.com2.z0.glb.qiniucdn.com/2015/10/22/Fi7PU9tfM2df3yp0uk8sXmHHxNcM.jpg" width="60px" height="60px"></td>';
+				str+='<td><p>'+data[i].name+'</p></td>';
+				str+='<td><p>￥0.01</p></td>';
+				str+='<td><p>￥0.01</p></td>';
+				str+='<td><p>8991</p></td>';
+				str+='<td>8</td><td>2016-04-06 11:16:45</td>';
+				str+='<td><p><a> 推广商品</a><span >|</span><a> 编辑</a><span>|</span><a>删除</a></p></td></tr>';
+            }
+            $('.goods-list tbody').html(str);
+        }
+	})
+</script>
 </html>

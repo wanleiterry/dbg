@@ -22,7 +22,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="supply_main">
-						<ul class="list-inline hidden-xs">
+						<ul class="list-inline hidden-xs" id='product_type'>
 							<li>
                                 <a>GRC玻璃钢模具<span>(7)</span></a>
                             </li>
@@ -91,6 +91,7 @@
                         </div>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
@@ -104,14 +105,26 @@
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
     $.ajax({
-        url: 'case/list.json',
-        type: "post",
+        url:'/cate/list.json',
+        type: "get",
         dataType: "json",
         data: '',
         success: function(data){
-            console.log(data);
             var str='';
-            for(var i=0;i<10;i++){
+            for(var i=0;i<data.length;i++){
+                str+='<li><a>'+data[i].name+'</a></li>'
+            }
+            $('#product_type').html(str)
+        }
+    })
+    $.ajax({
+        url: '/case/list.json',
+        type: "get",
+        dataType: "json",
+        data: '',
+        success: function(data){
+            var str='';
+            for(var i=0;i<data.length;i++){
                 str+='<div class="col-md-3 col-sm-3 col-xs-6">';
                 str+='<div class="thumbnail">';
                 str+='<img src="../images/company.jpg" alt="...">';
