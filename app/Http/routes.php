@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 /*
 |--------------------------------------------------------------------------
@@ -109,3 +109,4 @@ Route::group(['prefix' => 'case'], function()
     Route::get('{id}.json', 'AnliController@getAnli');
 });
 
+Route::get('/', 'WelcomeController@index');

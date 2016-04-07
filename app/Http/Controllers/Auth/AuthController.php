@@ -40,7 +40,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['postLogin', 'getLogout']]);
     }
 
 //     /**
@@ -73,6 +73,12 @@ class AuthController extends Controller
 //         ]);
 //     }
 
+    public function getLogin() {
+    	\View::addExtension('html', 'php');
+//     	return view()->file('/html/about.html');
+    	return view('about');
+    }
+    
     public function postLogin() {
     	$input = array(
     			'username' => Input::get('username'),
@@ -102,8 +108,7 @@ class AuthController extends Controller
     	}
     }
     
-    public function getGlobal()
-    {
+    public function getGlobal() {
     	$global = [];
     	$global['url'] = [
     			'base' => url(),
@@ -113,5 +118,15 @@ class AuthController extends Controller
     	$global['realname'] = Auth::user()->realname;
     	$global['is_admin'] = Auth::user()->is_admin;
     	return $global;
+    }
+    
+    public function getLogout() {
+    	Auth::logout();
+    	
+    	if(isset($_GET['runUrl'])){
+    		return redirect()->guest('auth/login');
+    	}
+    	
+    	return Response::json(['success'=>true], 200);
     }
 }
