@@ -35,7 +35,7 @@ Route::group(['prefix' => 'auth'], function () {
 	//登录接口
 	Route::post('login.json', $Auth . 'postLogin');
 	//登出
-	Route::get('logout', $Auth . 'getLogout');
+//	Route::get('logout', $Auth . 'getLogout');
 	Route::get('logout.json', $Auth . 'getLogout');
 	//登录
 	Route::get('login', $Auth . 'getLogin');
@@ -52,10 +52,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.api'], function()
     //产品
     Route::post('product/create.json', 'ProductController@postProduct');
     Route::put('product/{id}.json', 'ProductController@putProduct');
+    Route::delete('product/{id}.json', 'ProductController@delProduct');
 
     //新闻
     Route::post('news/create.json', 'NewsController@postNews');
     Route::put('news/{id}.json', 'NewsController@putNews');
+    Route::delete('news/{id}.json', 'NewsController@delNews');
 
     //公司信息
     Route::put('company.json', 'CompanyController@putCompany');
@@ -63,10 +65,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.api'], function()
     //分类
     Route::post('cate/create.json', 'CategoryController@postCategory');
     Route::put('cate/{id}.json', 'CategoryController@putCategory');
+    Route::delete('cate/{id}.json', 'CategoryController@delCategory');
 
     //案例
     Route::post('case/create.json', 'AnliController@postAnli');
     Route::put('case/{id}.json', 'AnliController@putAnli');
+    Route::delete('case/{id}.json', 'AnliController@delAnli');
 });
 
 //产品
