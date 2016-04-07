@@ -38,7 +38,7 @@
 					            <th>管理</th>
 					        </tr>
 				        </thead>
-				        <tbody>
+				        <tbody id="goods-list">
 					        
 				        </tbody>
 				    </table>
@@ -59,19 +59,20 @@
         dataType: "json",
         data: '',
 		success: function(data){
+			var json=data.data;
             var str='';
-            for(var i=0;i<data.length;i++){
-				console.log(data[i])
+            for(var i=0;i<json.length;i++){
+            	console.log(i)
                 str+='<tr><td><input type="checkbox"></td>';
 				str+='<td><img class="goods-image" src="http://7xk9pc.com2.z0.glb.qiniucdn.com/2015/10/22/Fi7PU9tfM2df3yp0uk8sXmHHxNcM.jpg" width="60px" height="60px"></td>';
-				str+='<td><p>'+data[i].name+'</p></td>';
+				str+='<td><p>'+json[i].name+'</p></td>';
 				str+='<td><p>￥0.01</p></td>';
 				str+='<td><p>￥0.01</p></td>';
 				str+='<td><p>8991</p></td>';
 				str+='<td>8</td><td>2016-04-06 11:16:45</td>';
-				str+='<td><p><a> 推广商品</a><span >|</span><a> 编辑</a><span>|</span><a>删除</a></p></td></tr>';
+				str+='<td><p><a> 编辑</a><span>|</span><a>删除</a></p></td></tr>';
             }
-            $('.goods-list tbody').html(str);
+            $('#goods-list').html(str);
         }
 	})
 </script>
