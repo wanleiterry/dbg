@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Category;
+use App\Models\Anli;
 
 class CategoryService {
 
@@ -47,6 +48,18 @@ class CategoryService {
 		} else {
 			return array('status' => false, 'result' => '修改失败');
 		}
+    }
+
+    public function remove($id) {
+        if (Anli::where('category_id', $id)->count() > 0) {
+            if ($this->model->where('id', $id)->delete()) {
+                return array('status' => true);
+            } else {
+                return array('status' => false, 'result' => '删除失败');
+            }
+        } else {
+            return array('status' => false, 'result' => '当前分类下有案例，不能删除');
+        }
     }
 
 }

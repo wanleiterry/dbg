@@ -37,4 +37,9 @@ class AnliController extends Controller {
         return Response::json($result, 200);
     }
 
+    public function delAnli($id) {
+        $result = $this->anliService->remove($id);
+        return Response::json($result, 200);
+    }
+
 }

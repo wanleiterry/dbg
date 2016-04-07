@@ -75,4 +75,12 @@ class AnliService {
 		}
     }
 
+	public function remove($id) {
+		if($this->model->where('id', $id)->delete()) {
+			return array('status' => true);
+		} else {
+			return array('status' => false, 'result' => '删除失败');
+		}
+	}
+
 }

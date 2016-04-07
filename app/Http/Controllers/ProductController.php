@@ -37,4 +37,9 @@ class ProductController extends Controller {
         return Response::json($result, 200);
     }
 
+    public function delProduct($id) {
+        $result = $this->productService->remove($id);
+        return Response::json($result, 200);
+    }
+
 }

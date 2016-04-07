@@ -37,4 +37,9 @@ class NewsController extends Controller {
         return Response::json($result, 200);
     }
 
+    public function delNews($id) {
+        $result = $this->newsService->remove($id);
+        return Response::json($result, 200);
+    }
+
 }

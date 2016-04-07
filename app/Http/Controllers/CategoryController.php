@@ -37,4 +37,9 @@ class CategoryController extends Controller {
         return Response::json($result, 200);
     }
 
+    public function delCategory($id) {
+        $result = $this->categoryService->remove($id);
+        return Response::json($result, 200);
+    }
+
 }
