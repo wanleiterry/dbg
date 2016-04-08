@@ -15,11 +15,10 @@ class UserController extends Controller
      * @return void
      */
     public function __construct(UserService $userService) {
-//         $this->middleware('guest', ['except' => 'logout']);
 		$this->userService = $userService;
     }
 
-    public function showUser() {
+    public function showUser(Request $request) {dd($request->user());
     	$result = $this->userService->getUser();
     	return Response::json($result, 200);
     }

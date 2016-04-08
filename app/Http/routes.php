@@ -42,7 +42,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 //管理员
-Route::group(['prefix' => 'admin', 'middleware' => 'auth.api'], function()
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 {
     //管理员信息
 	Route::get('user.json', 'UserController@showUser');
@@ -114,3 +114,8 @@ Route::group(['prefix' => 'case'], function()
 });
 
 Route::get('/', 'WelcomeController@index');
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+
+    Route::get('/home', 'HomeController@index');
+});

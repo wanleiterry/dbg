@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -31,7 +32,7 @@ class AuthController extends Controller
 //     *
 //     * @var string
 //     */
-//    protected $redirectTo = '/auth/login';
+   protected $redirectTo = '/admin/user.json';
 
     /**
      * Create a new authentication controller instance.
@@ -98,33 +99,22 @@ class AuthController extends Controller
     			'password' => Input::get('password')
     		];
     		if(Auth::validate($credentials)) {
-    			Auth::login(Auth::getLastAttempted());
-    			return Response::json(['success'=>true, 'data'=>$this->getGlobal()], 200);
+    			Auth::login(Auth::getLastAttempted(), true);
+    			return Response::json(['success'=>true], 200);
     		} else {
     			return Response::json(['error'=>['message'=>['login'=>['“用户名”或“密码”错误，请重新登录！']], 'type'=>'Auth', 'code'=>401]]);
     		}
     	}
     }
     
-    public function getGlobal() {
-    	$global = [];
-    	$global['url'] = [
-    			'base' => url(),
-    			'static' => env('STATIC_DOMAIN'),
-    	];
-    	$global['username'] = Auth::user()->username;
-    	$global['realname'] = Auth::user()->realname;
-    	$global['is_admin'] = Auth::user()->is_admin;
-    	return $global;
-    }
-    
     public function getLogout() {
     	Auth::logout();
+    	return redirect()->guest('auth/login');
     	
-    	if(isset($_GET['runUrl'])){
-    		return redirect()->guest('auth/login');
-    	}
+//     	if(isset($_GET['runUrl'])){
+//     		return redirect()->guest('auth/login');
+//     	}
     	
-    	return Response::json(['success'=>true], 200);
+//     	return Response::json(['success'=>true], 200);
     }
 }

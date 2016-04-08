@@ -35,7 +35,6 @@ class AuthApi {
 	 */
 	public function handle($request, Closure $next)
 	{
-        //dd(1);
         if ($this->auth->guest())
         {
             return Response::json('没有权限', 401);
