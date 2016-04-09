@@ -147,15 +147,10 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">图片</label>
 					<div class="col-sm-10">
-						 <input type="file" id="exampleInputFile">
+						 <input type="file" id="uploadimg">
 					</div>
 					<div class='col-sm-12'>
 						<input type="text" class="form-control" id="img" placeholder="图片">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
-					<div class="col-sm-10">
 					</div>
 				</div>
 				<div class="form-group">
@@ -175,8 +170,8 @@
 	</div>
 </div>
 </body>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script>
@@ -287,13 +282,13 @@
 				'pic':$('#img').val()
 			}
 			$.ajax({
-				url: '/admin/news/create.json',
+				url: '/admin/product/create.json',
 				type:"post",
 				dataType:"json",
 				data:param,
 				success:function(data){
 					console.log(data);
-					$('.close').click()
+					$('.close').click();
 					loadlist();
 				}
 			});
