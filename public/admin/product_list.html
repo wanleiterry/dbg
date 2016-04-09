@@ -9,45 +9,33 @@
 </head>
 <body>
 <div id="header"></div>
-<div class="main clearfix">
+<div class="main clearfix container">
   	<div id="left"></div>
   	<div class="rt_wrap content mCustomScrollbar">
+		<p>
+			<button type="button" class="btn btn-danger" class="addproduct" data-toggle="modal"  data-target=".creategoods">
+				<span class='glyphicon glyphicon-plus'></span>增加案例
+			</button>
+		</p>
   		<div class="table-responsive">
 			<table class="table">
 				<tbody>
 					<table class="table table-hover goods-list">
-				        <colgroup>
-				            <col class="cell-cb">
-				            <col width="80">
-				            <col width="320">
-				            <col>
-				            <col>
-				            <col>
-				            <col class="cell-datetime">
-				            <col width="200">
-				        </colgroup>
 				        <thead>
 					        <tr>
-					            <th><input type="checkbox" class="delall"></th>
-					            <th></th>
-					            <th>商品</th>
-					            <th>价格</a></th>
-					            <th><a>库存</a></th>
-					            <th><a>销量</a></th>
-					            <th><a>发布时间</a></th>
-					            <th>管理</th>
+					            <th style='width:10%'></th>
+					            <th style='width:15%'>商品</th>
+					            <th style='width:45%'>描述</th>
+					            <th style='width:20%'><a>发布时间</a></th>
+					            <th style='width:10%'>管理</th>
 					        </tr>
 				        </thead>
-				        <tbody id="goods-list">
-					        
-				        </tbody>				        
+				        <tbody id="goods-list"></tbody>				        
 				    </table>
 				    <table class="table">
 				    	<tbody>
 				    		<tr>
-				    			<td width="10%"><input type="checkbox" class="delall"></td>
-				    			<td width="10%"><a>删除</a></td>
-				    			<td width="80%">
+				    			<td>
 				    				<div class="pull-left">
 				    					共有<span class="total_num"></span>条数据
 				    				</div>
@@ -81,6 +69,106 @@
 			</table>
 		</div>
   	</div>
+  	<div class="modal fade changegoods" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+	        	<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4>案例展示</h4>
+	      		</div>
+            	<form class="form-horizontal">
+            		<span class="change_product_id" style='display: none'></span>
+				  	<div class="form-group">
+				    	<label for="inputEmail3" class="col-sm-2 control-label">标题</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="inputEmail3" placeholder="标题">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">内容</label>
+				    	<div class="col-sm-10">
+				      		<textarea class="form-control" id='content'>
+				      			
+				      		</textarea>
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">图片</label>
+				    	<div class="col-sm-10">
+				    		 <input type="file" id="exampleInputFile">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
+				  		<div class="col-sm-10">
+				  		</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<div class="col-sm-offset-2 col-sm-10">
+				      		<ul class="list-inline">
+				      			<li>				      				
+				      				<button type="button" class="btn btn-default" id="ok">保存</button>
+				      			</li>
+				      			<li>				      				
+				      				<button type="button" class="btn btn-default">取消</button>
+				      			</li>
+				      		</ul>
+				    	</div>
+				  	</div>
+				</form>
+            </div>
+        </div>
+    </div>
+	<div class="modal fade creategoods" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+	        	<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4>案例展示</h4>
+	      		</div>
+            	<form class="form-horizontal">
+            		<span class="change_product_id" style='display: none'></span>
+				  	<div class="form-group">
+				    	<label for="inputEmail3" class="col-sm-2 control-label">标题</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="inputEmail3" placeholder="标题">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">内容</label>
+				    	<div class="col-sm-10">
+				      		<textarea class="form-control" id='content'>
+				      			
+				      		</textarea>
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">图片</label>
+				    	<div class="col-sm-10">
+				    		 <input type="file" id="exampleInputFile">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
+				  		<div class="col-sm-10">
+				  		</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<div class="col-sm-offset-2 col-sm-10">
+				      		<ul class="list-inline">
+				      			<li>				      				
+				      				<button type="button" class="btn btn-default" id="create">保存</button>
+				      			</li>
+				      			<li>				      				
+				      				<button type="button" class="btn btn-default">取消</button>
+				      			</li>
+				      		</ul>
+				    	</div>
+				  	</div>
+				</form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="../js/jquery.min.js"></script>
@@ -88,46 +176,82 @@
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script>
-	$.ajax({
-		url:'/product/list.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-		success: function(data){
-			$('.total_num').html(''+data._count+'');
-			var json=data.data;
-            var str='';
-            for(var i=0;i<json.length;i++){
-            	console.log(i)
-                str+='<tr><td><input type="checkbox"></td>';
-				str+='<td><img class="goods-image" src="http://7xk9pc.com2.z0.glb.qiniucdn.com/2015/10/22/Fi7PU9tfM2df3yp0uk8sXmHHxNcM.jpg" width="60px" height="60px"></td>';
-				str+='<td><p>'+json[i].name+'</p></td>';
-				str+='<td><p>￥0.01</p></td>';
-				str+='<td><p>￥0.01</p></td>';
-				str+='<td><p>8991</p></td>';
-				str+='<td>8</td><td>2016-04-06 11:16:45</td>';
-				str+='<td><p><a> 编辑</a><span>|</span><a onclick="delgoods('+json[i].id+')">删除</a></p></td></tr>';
-            }
-            $('#goods-list').html(str);
-        }
-	});
-	function delgoods(id){
-		console.log(id);
-		if(window.confirm('你确定要删除选中的产品吗？')){
-			//alert("确定");
+	$(function(){
+		function loadlist(){
 			$.ajax({
-				url: '/admin/product/'+id+'.json',
-				type:"delete",
-				dataType:"json",
-				data:'',
-				success:function(data){
-					console.log(data);
+				url:'/product/list.json',
+				type: "get",
+				dataType: "json",
+				data: '',
+				success: function(data){
+					$('.total_num').html(''+data._count+'');
+					var json=data.data;
+					var str='';
+					for(var i=0;i<json.length;i++){
+						console.log(i)
+						str+='<tr><td><img class="goods-image" src="'+json[i].pic+'" width="60px" height="60px"></td>';
+						str+='<td><p>'+json[i].name+'</p></td>';
+						str+='<td><p>'+json[i].desc+'</p></td>';
+						str+='<td>'+json[i].updated_at+'</td>';
+						str+='<td><p><a onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changegoods"> 编辑</a>';
+						str+='<span>|</span><a class="delete" id="'+json[i].id+'">删除</a></p></td></tr>';
+					}
+					$('#goods-list').html(str);
 				}
 			});
 		}
-		else{
-			return false;
-		}	
-	}
+		$('.delete').bind('click',function(){
+			var id=$(this).attr("id");
+			alert(id);
+			if(window.confirm('你确定要删除选中的产品吗？')){
+				//alert("确定");
+				$.ajax({
+					url: '/admin/product/'+id+'.json',
+					type:"delete",
+					dataType:"json",
+					data:'',
+					success:function(data){
+						console.log(data);
+						loadlist();
+					}
+				});
+			}
+			else{
+				return false;
+			}	
+		})
+		function delgoods(id){
+			console.log(id);
+			if(window.confirm('你确定要删除选中的产品吗？')){
+				//alert("确定");
+				$.ajax({
+					url: '/admin/product/'+id+'.json',
+					type:"delete",
+					dataType:"json",
+					data:'',
+					success:function(data){
+						console.log(data);
+						loadlist();
+					}
+				});
+			}
+			else{
+				return false;
+			}	
+		}
+		function edit(id) {
+			$.ajax({
+				url:'/product/'+id+'.json',
+				type: "get",
+				dataType: "json",
+				data: '',
+				success: function(data){
+					console.log(data);
+					$('.change_news_id').html(''+id+'');
+				}
+			})
+		}
+		loadlist();
+	})
 </script>
 </html>

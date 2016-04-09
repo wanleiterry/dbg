@@ -10,29 +10,24 @@
 </head>
 <body>
 <div id="header"></div>
-<div class="main clearfix">
+<div class="main clearfix container">
   	<div id="left"></div>
   	<div class="rt_wrap content mCustomScrollbar">
+		<p>
+			<button type="button" class="btn btn-danger" class="addnews" data-toggle="modal"  data-target=".createnews">
+				<span class='glyphicon glyphicon-plus'></span>增加资讯
+			</button>
+		</p>
 	  	<div class="table-responsive">
 			<table class="table">
 				<tbody>
 					<table class="table table-hover goods-list">
-				        <colgroup>
-				            <col class="cell-cb">
-				            <col width="80">
-				            <col width="320">
-				            <col>
-				            <col>
-				            <col>
-				            <col class="cell-datetime">
-				            <col width="200">
-				        </colgroup>
 				        <thead>
 					        <tr>
-					            <th><input type="checkbox" class="delall"></th>
-					            <th>标题</th>
-					            <th>发布时间</a></th>
-					            <th>管理</th>
+					            <th style='width:15%'>标题</th>
+								<th style='width:45%'>内容</th>
+					            <th style='width:25%'>发布时间</a></th>
+					            <th style='width:15%'>管理</th>
 					        </tr>
 				        </thead>
 				        <tbody id="goods-list">
@@ -42,8 +37,6 @@
 				    <table class="table">
 				    	<tbody>
 				    		<tr>
-				    			<td width="10%"><input type="checkbox" class="delall"></td>
-				    			<td width="10%"><a>删除</a></td>
 				    			<td width="80%">
 				    				<div class="pull-left">
 				    					共有<span class="total_num"></span>条数据
@@ -80,90 +73,126 @@
   	</div>
 </div>
 <div class="modal fade changenews" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-	        	<div class="modal-header">
-	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        		<h4>案例展示</h4>
-	      		</div>
-            	<form class="form-horizontal">
-            		<span class="change_news_id"></span>
-				  	<div class="form-group">
-				    	<label for="inputEmail3" class="col-sm-2 control-label">标题</label>
-				    	<div class="col-sm-10">
-				      		<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-				    	</div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="inputPassword3" class="col-sm-2 control-label">内容</label>
-				    	<div class="col-sm-10">
-				      		<textarea class="form-control" id='content'>
-				      			
-				      		</textarea>
-				    	</div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label for="inputPassword3" class="col-sm-2 control-label">图片</label>
-				    	<div class="col-sm-10">
-				    		 <input type="file" id="exampleInputFile">
-				    	</div>
-				  	</div>
-				  	<div class="form-group">
-				  		<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
-				  		<div class="col-sm-10">
-				  		</div>
-				  	</div>
-				  	<div class="form-group">
-				    	<div class="col-sm-offset-2 col-sm-10">
-				      		<ul class="list-inline">
-				      			<li>				      				
-				      				<button type="button" class="btn btn-default" id="ok">保存</button>
-				      			</li>
-				      			<li>				      				
-				      				<button type="button" class="btn btn-default">取消</button>
-				      			</li>
-				      		</ul>
-				    	</div>
-				  	</div>
-				</form>
-            </div>
-        </div>
-    </div>
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4>案例展示</h4>
+			</div>
+			<form class="form-horizontal">
+				<span class="change_news_id"></span>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">标题</label>
+					<div class="col-sm-10">
+						<input type="email" class="form-control" id="editname" placeholder="Email">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">内容</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" id='editdesc'>
+							
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">图片</label>
+					<div class="col-sm-10">
+						 <input type="file">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">图片预览</label>
+					<div class="col-sm-10">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<ul class="list-inline">
+							<li>				      				
+								<button type="button" class="btn btn-default" id="ok">保存</button>
+							</li>
+							<li>				      				
+								<button type="button" class="btn btn-default">取消</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade createnews" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4>案例展示</h4>
+			</div>
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label class="col-sm-2 control-label">标题</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="title" placeholder="标题">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">内容</label>
+					<div class="col-sm-10">
+						<textarea class="form-control" id='content'>
+							
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">图片</label>
+					<div class="col-sm-10">
+						 <input type="file" id="exampleInputFile">
+					</div>
+					<div class='col-sm-12'>
+						<input type="text" class="form-control" id="img" placeholder="图片">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
+					<div class="col-sm-10">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<ul class="list-inline">
+							<li>				      				
+								<button type="button" class="btn btn-default" id="create">保存</button>
+							</li>
+							<li>				      				
+								<button type="button" class="btn btn-default" id='quxiao'>取消</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script>
-	$(function(){
-		$.ajax({
-			url:'/news/list.json',
-	        type: "get",
-	        dataType: "json",
-	        data: '',
-			success: function(data){
-				console.log(data);
-	            var str='';
-	            for(var i=0;i<data.length;i++){
-	                str+='<tr><td><input type="checkbox"></td>';
-					str+='<td><p>'+data[i].title+'</p></td>';
-					str+='<td>8</td><td>2016-04-06 11:16:45</td>';
-					str+='<td><p><a onclick="edit('+data[i].id+')" data-toggle="modal"  data-target=".changenews">编辑</a>';
-					str+='<span>|</span><a onclick="delgoods('+data[i].id+')">删除</a></p></td></tr>';
-	            }
-	            $('#goods-list').html(str);
-	        }
-		});
-		function delgoods(id){
+	$(function(){		
+		function deletenews(id){
+			console.log(id);
 			if(window.confirm('你确定要删除选中的产品吗？')){
 				//alert("确定");
 				$.ajax({
-					url: '/admin/product/'+id+'.json',
+					url: '/admin/news/'+id+'.json',
 					type:"delete",
 					dataType:"json",
 					data:'',
 					success:function(data){
 						console.log(data);
+						loadlist();
 					}
 				});
 			}
@@ -183,14 +212,89 @@
 	            }
 	        })
 		}
+		function loadlist(){
+			$.ajax({
+				url:'/news/list.json',
+				type: "get",
+				dataType: "json",
+				data: '',
+				success: function(data){
+					console.log(data);
+					var str='';
+					for(var i=0;i<data.length;i++){
+						str+='<tr><td><p>'+data[i].title+'</p></td>';
+						str+='<td>'+data[i].desc+'</td>';
+						str+='<td>2016-04-06 11:16:45</td>';
+						str+='<td><p><a class="editnews" val="'+data[i].id+'" data-toggle="modal"  data-target=".changenews">编辑</a>';
+						str+='<span>|</span><a class="deletenews" val="'+data[i].id+'">删除</a></p></td></tr>';
+					}
+					$('#goods-list').html(str);
+				}
+			});
+		}
+		loadlist();
+		$('.deletenews').bind('click',function(){
+			var id=$(this).attr('val');
+			if(window.confirm('你确定要删除选中的产品吗？')){
+				//alert("确定");
+				$.ajax({
+					url: '/admin/news/'+id+'.json',
+					type:"delete",
+					dataType:"json",
+					data:'',
+					success:function(data){
+						console.log(data);
+						loadlist();
+					}
+				});
+			}
+			else{
+				return false;
+			}	
+		});
+		$('.editnews').bind('click',function(){
+			var id=$(this).attr('val');
+			$.ajax({
+	            url:'/news/'+id+'.json',
+	            type: "get",
+	            dataType: "json",
+	            data: '',
+	            success: function(data){
+	                console.log(data);
+	                $('.change_news_id').html(''+id+'');
+	            }
+	        })
+		});
 		$('#ok').click(function(){
+			var id=$('.change_news_id').text();
 			$.ajax({
 				url: '/admin/news/'+id+'.json',
-				type:"delete",
+				type:"put",
 				dataType:"json",
 				data:'',
 				success:function(data){
 					console.log(data);
+				}
+			});
+		});
+		$('#quxiao').click(function(){			
+			$('.close').click()
+		})
+		$('#create').click(function(){
+			var param = {
+				'desc':$('#content').val(),
+				'title':$('#title').val(),
+				'pic':$('#img').val()
+			}
+			$.ajax({
+				url: '/admin/news/create.json',
+				type:"post",
+				dataType:"json",
+				data:param,
+				success:function(data){
+					console.log(data);
+					$('.close').click()
+					loadlist();
 				}
 			});
 		})
