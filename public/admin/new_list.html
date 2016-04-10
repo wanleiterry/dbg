@@ -174,92 +174,61 @@
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
-<script>
-	$(function(){		
-		function deletenews(id){
-			console.log(id);
-			if(window.confirm('你确定要删除选中的产品吗？')){
-				//alert("确定");
-				$.ajax({
-					url: '/admin/news/'+id+'.json',
-					type:"delete",
-					dataType:"json",
-					data:'',
-					success:function(data){
-						console.log(data);
-						loadlist();
-					}
-				});
-			}
-			else{
-				return false;
-			}	
-		}
-		function edit(id) {
+<script>	
+	function deletenews(id){
+		console.log(id);
+		if(window.confirm('你确定要删除选中的产品吗？')){
+			//alert("确定");
 			$.ajax({
-	            url:'/news/'+id+'.json',
-	            type: "get",
-	            dataType: "json",
-	            data: '',
-	            success: function(data){
-	                console.log(data);
-	                $('.change_news_id').html(''+id+'');
-	            }
-	        })
-		}
-		function loadlist(){
-			$.ajax({
-				url:'/news/list.json',
-				type: "get",
-				dataType: "json",
-				data: '',
-				success: function(data){
+				url: '/admin/news/'+id+'.json',
+				type:"delete",
+				dataType:"json",
+				data:'',
+				success:function(data){
 					console.log(data);
-					var str='';
-					for(var i=0;i<data.length;i++){
-						str+='<tr><td><p>'+data[i].title+'</p></td>';
-						str+='<td>'+data[i].desc+'</td>';
-						str+='<td>2016-04-06 11:16:45</td>';
-						str+='<td><p><a class="editnews" val="'+data[i].id+'" data-toggle="modal"  data-target=".changenews">编辑</a>';
-						str+='<span>|</span><a class="deletenews" val="'+data[i].id+'">删除</a></p></td></tr>';
-					}
-					$('#goods-list').html(str);
+					loadlist();
 				}
 			});
 		}
-		loadlist();
-		$('.deletenews').bind('click',function(){
-			var id=$(this).attr('val');
-			if(window.confirm('你确定要删除选中的产品吗？')){
-				//alert("确定");
-				$.ajax({
-					url: '/admin/news/'+id+'.json',
-					type:"delete",
-					dataType:"json",
-					data:'',
-					success:function(data){
-						console.log(data);
-						loadlist();
-					}
-				});
+		else{
+			return false;
+		}	
+	}
+	function edit(id) {
+		$.ajax({
+            url:'/news/'+id+'.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                console.log(data);
+                $('.change_news_id').html(''+id+'');
+                loadlist();
+            }
+        })
+	}
+	function loadlist(){
+		$.ajax({
+			url:'/news/list.json',
+			type: "get",
+			dataType: "json",
+			data: '',
+			success: function(data){
+				console.log(data);
+				var str='';
+				for(var i=0;i<data.length;i++){
+					str+='<tr><td><p>'+data[i].title+'</p></td>';
+					str+='<td>'+data[i].desc+'</td>';
+					str+='<td>2016-04-06 11:16:45</td>';
+					str+='<td><p><a class="editnews" onclick="edit('+data[i].id+')" data-toggle="modal"  data-target=".changenews">编辑</a>';
+					str+='<span>|</span><a class="deletenews" onclick="deletenews('+data[i].id+')">删除</a></p></td></tr>';
+				}
+				$('#goods-list').html(str);
 			}
-			else{
-				return false;
-			}	
 		});
-		$('.editnews').bind('click',function(){
-			var id=$(this).attr('val');
-			$.ajax({
-	            url:'/news/'+id+'.json',
-	            type: "get",
-	            dataType: "json",
-	            data: '',
-	            success: function(data){
-	                console.log(data);
-	                $('.change_news_id').html(''+id+'');
-	            }
-	        })
-		});
+	}
+	$(function(){	
+		loadlist();
 		$('#ok').click(function(){
 			var id=$('.change_news_id').text();
 			$.ajax({
@@ -277,19 +246,25 @@
 		})
 		$('#create').click(function(){
 			var param = {
-				'desc':$('#content').val(),
-				'title':$('#title').val(),
-				'pic':$('#img').val()
+				'name':$('#title').val(),
+				'content':$('#content').val(),
+				'pic':$('#img').val(),
+				'desc':$('#content').val()
 			}
 			$.ajax({
-				url: '/admin/product/create.json',
+				url: '/admin/news/create.json',
 				type:"post",
 				dataType:"json",
 				data:param,
 				success:function(data){
 					console.log(data);
-					$('.close').click();
-					loadlist();
+					if(data.status==true){
+						$('.close').click();
+						loadlist();
+					}
+					else{
+						alert('创建失败');
+					}
 				}
 			});
 		})

@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
 	<div id="header"></div>
-	<div class="container">
+	<div class="container" id="main">
 		<div class="row">
 			<div class="col-md-3 col-sm-3 hidden-xs" id="left"></div>
             <div class="col-md-9 col-sm-9 col-xs-12">
@@ -23,42 +23,6 @@
 					</div>
 					<div class="supply_main">
 						<ul class="list-inline hidden-xs" id='product_type'>
-							<li>
-                                <a>GRC玻璃钢模具<span>(7)</span></a>
-                            </li>
-                            <li>
-                                <a>EPS线条及构件<span>(13)</span></a>
-                            </li>
-                        	<li>
-                                <a>GRC构件<span>(59)</span></a>
-                            </li>
-                           	<li>
-                                <a>镜框系列<span>(2)</span></a>
-                            </li>
-                         	<li>
-                                <a>吊顶系列<span>(9)</span></a>
-                            </li>
-                        	<li>
-                                <a>花板系列<span>(36)</span></a>
-                            </li>
-                           	<li>
-                                <a>柱子系列<span>(4)</span></a>
-                            </li>
-                           	<li>
-                                <a>砂岩装饰板系列<span>(49)</span></a>
-                            </li>
-                            <li>
-                                <a>浮雕系列<span>(17)</span></a>
-                            </li>
-                            <li>
-                                <a>雕塑系列<span>(25)</span></a>
-                            </li>
-                            <li>
-                                <a>花盆系列<span>(10)</span></a>
-                            </li>
-                            <li>
-                                <a>招聘信息<span>(5)</span></a>
-                            </li>
 						</ul>    
                         <div class="supply_new row" id="supply_list">
 
@@ -94,7 +58,7 @@
 			</div>
 		</div>
 	</div>
-    <div class="modal fade detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal fade detail" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="now_supply">
         <div class="modal-dialog modal-lg">  
             <div class="modal-content">      
                 <div class="modal-header">
@@ -133,10 +97,10 @@
             data: '',
             success: function(data){
                 console.log(data);
-                $('.title').html(''+data.name+'');
-                $('.panel-heading .time').html(''+data.created_at+'');
-                $('.panel-body img').attr("src",""+data.pic+"");
-                $('.panel-body .caption p').html(''+data.content+'');
+                $('#now_supply .title').html(''+data.name+'');
+                $('#now_supply .panel-heading .time').html(''+data.created_at+'');
+                $('#now_supply .panel-body img').attr("src",""+data.pic+"");
+                $('#now_supply .panel-body .caption p').html(''+data.content+'');
             }
         })
     }
@@ -167,7 +131,7 @@
                 for(var i=0;i<json.length;i++){
                     str+='<div class="col-md-3 col-sm-3 col-xs-6">';
                     str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
-                    str+='<img src="'+json[i].pic+'" alt="...">';
+                    str+='<img src="'+json[i].pic+'">';
                     str+='<div class="caption">';
                     str+='<h4>'+json[i].name+'</h4><p class="text-center">'+json[i].desc+'</p></div></div></div>';
                 }

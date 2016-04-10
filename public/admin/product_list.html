@@ -81,7 +81,15 @@
 				  	<div class="form-group">
 				    	<label for="inputEmail3" class="col-sm-2 control-label">标题</label>
 				    	<div class="col-sm-10">
-				      		<input type="text" class="form-control" id="inputEmail3" placeholder="标题">
+				      		<input type="text" class="form-control" id="title" placeholder="标题">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">关键字</label>
+				    	<div class="col-sm-10">
+				      		<textarea class="form-control" id='desc'>
+				      			
+				      		</textarea>
 				    	</div>
 				  	</div>
 				  	<div class="form-group">
@@ -102,6 +110,9 @@
 				  		<label for="inputPassword3" class="col-sm-2 control-label">图片预览</label>
 				  		<div class="col-sm-10">
 				  		</div>
+						<div class='col-sm-12'>
+							<input type="text" class="form-control" id="img" placeholder="图片">
+						</div>
 				  	</div>
 				  	<div class="form-group">
 				    	<div class="col-sm-offset-2 col-sm-10">
@@ -110,7 +121,7 @@
 				      				<button type="button" class="btn btn-default" id="ok">保存</button>
 				      			</li>
 				      			<li>				      				
-				      				<button type="button" class="btn btn-default">取消</button>
+				      				<button type="button" class="btn btn-default" id='cancel'>取消</button>
 				      			</li>
 				      		</ul>
 				    	</div>
@@ -131,13 +142,21 @@
 				  	<div class="form-group">
 				    	<label for="inputEmail3" class="col-sm-2 control-label">标题</label>
 				    	<div class="col-sm-10">
-				      		<input type="text" class="form-control" id="inputEmail3" placeholder="标题">
+				      		<input type="text" class="form-control" id="add_title" placeholder="标题">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="inputPassword3" class="col-sm-2 control-label">关键字</label>
+				    	<div class="col-sm-10">
+				      		<textarea class="form-control" id='add_desc'>
+				      			
+				      		</textarea>
 				    	</div>
 				  	</div>
 				  	<div class="form-group">
 				    	<label for="inputPassword3" class="col-sm-2 control-label">内容</label>
 				    	<div class="col-sm-10">
-				      		<textarea class="form-control" id='content'>
+				      		<textarea class="form-control" id='add_content'>
 				      			
 				      		</textarea>
 				    	</div>
@@ -148,7 +167,7 @@
 				    		 <input type="file" id="uploadimg">
 				    	</div>
 						<div class='col-sm-12'>
-							<input type="text" class="form-control" id="img" placeholder="图片">
+							<input type="text" class="form-control" id="add_img" placeholder="图片">
 						</div>
 				  	</div>
 				  	<div class="form-group">
@@ -174,90 +193,74 @@
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script>
-	$(function(){
-		function loadlist(){
+	function loadlist(){
+		$.ajax({
+			url:'/product/list.json',
+			type: "get",
+			dataType: "json",
+			data: '',
+			success: function(data){
+				$('.total_num').html(''+data._count+'');
+				var json=data.data;
+				var str='';
+				for(var i=0;i<json.length;i++){
+					str+='<tr><td><img class="goods-image" src="'+json[i].pic+'" width="60px" height="60px"></td>';
+					str+='<td><p>'+json[i].name+'</p></td>';
+					str+='<td><p>'+json[i].desc+'</p></td>';
+					str+='<td>'+json[i].updated_at+'</td>';
+					str+='<td><p><a onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changegoods"> 编辑</a>';
+					str+='<span>|</span><a class="delete" onclick="delnews('+json[i].id+')">删除</a></p></td></tr>';
+				}
+				$('#goods-list').html(str);
+			}
+		});
+	}
+	function delnews(id){
+		if(window.confirm('你确定要删除选中的产品吗？')){
+			//alert("确定");
 			$.ajax({
-				url:'/product/list.json',
-				type: "get",
-				dataType: "json",
-				data: '',
-				success: function(data){
-					$('.total_num').html(''+data._count+'');
-					var json=data.data;
-					var str='';
-					for(var i=0;i<json.length;i++){
-						console.log(i)
-						str+='<tr><td><img class="goods-image" src="'+json[i].pic+'" width="60px" height="60px"></td>';
-						str+='<td><p>'+json[i].name+'</p></td>';
-						str+='<td><p>'+json[i].desc+'</p></td>';
-						str+='<td>'+json[i].updated_at+'</td>';
-						str+='<td><p><a onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changegoods"> 编辑</a>';
-						str+='<span>|</span><a class="delete" id="'+json[i].id+'">删除</a></p></td></tr>';
-					}
-					$('#goods-list').html(str);
+				url: '/admin/product/'+id+'.json',
+				type:"delete",
+				dataType:"json",
+				data:'',
+				success:function(data){
+					console.log(data);
+					loadlist();
 				}
 			});
 		}
-		$('.delete').bind('click',function(){
-			var id=$(this).attr("id");
-			alert(id);
-			if(window.confirm('你确定要删除选中的产品吗？')){
-				//alert("确定");
-				$.ajax({
-					url: '/admin/product/'+id+'.json',
-					type:"delete",
-					dataType:"json",
-					data:'',
-					success:function(data){
-						console.log(data);
-						loadlist();
-					}
-				});
+		else{
+			return false;
+		}	
+	}	
+	function edit(id) {
+		$.ajax({
+			url:'/product/'+id+'.json',
+			type: "get",
+			dataType: "json",
+			data: '',
+			success: function(data){
+				console.log(data);
+				console.log(id);
+				$('.change_product_id').html(''+id+'');
+				$('#title').val(''+data.name+'');
+				$('#desc').val(''+data.desc+'');
+				$('#img').val(''+data.pic+'');
+				$('#content').val(''+data.content+'');
 			}
-			else{
-				return false;
-			}	
 		})
-		function delgoods(id){
-			console.log(id);
-			if(window.confirm('你确定要删除选中的产品吗？')){
-				//alert("确定");
-				$.ajax({
-					url: '/admin/product/'+id+'.json',
-					type:"delete",
-					dataType:"json",
-					data:'',
-					success:function(data){
-						console.log(data);
-						loadlist();
-					}
-				});
-			}
-			else{
-				return false;
-			}	
-		}
-		function edit(id) {
-			$.ajax({
-				url:'/product/'+id+'.json',
-				type: "get",
-				dataType: "json",
-				data: '',
-				success: function(data){
-					console.log(data);
-					$('.change_news_id').html(''+id+'');
-				}
-			})
-		}
+	}
+	$(function(){
 		loadlist();		
 		$('#create').click(function(){
 			var param = {
-				'desc':$('#content').val(),
-				'title':$('#title').val(),
-				'pic':$('#img').val()
+				'name':$('#add_title').val(),
+				'desc':$('#add_desc').val(),
+				'pic':$('#add_img').val(),
+				'content':$('#add_content').val()
 			}
 			$.ajax({
-				url: '/admin/news/create.json',
+				url: '/admin/product/create.json',
 				type:"post",
 				dataType:"json",
 				data:param,
@@ -270,7 +273,35 @@
 		});
 		$("#quxiao").click(function(){
 			$(".close").click();
-		})
+		});
+		$('#cancel').click(function(){
+			$(".close").click();
+		});
+		$('#ok').click(function(){
+			var id=$('.change_product_id').text();
+			var param = {
+				'name':$('#title').val(),
+				'desc':$('#desc').val(),
+				'pic':$('#img').val(),
+				'content':$('#content').val()
+			}
+			$.ajax({
+				url: '/admin/product/'+id+'.json',
+				type:"put",
+				dataType:"json",
+				data:param,
+				success:function(data){
+					console.log(data);
+					if(data.status==true){
+						$(".close").click();
+						loadlist();
+					}
+					else{
+						alert('修改失败！！');
+					}
+				}
+			});
+		});
 	})
 </script>
 </html>

@@ -12,7 +12,7 @@
 <body>
 <div class="container-fluid">
 	<div id="header"></div>
-	<div class="container">
+	<div class="container" id="main">
 		<div class="row">
 			<div class="col-md-3 col-sm-3 hidden-xs" id="left"></div>
 			<div class="col-md-9 col-sm-9 col-xs-12">
@@ -52,13 +52,19 @@
 						</div>
 					</div>
 				</div>
-				<div class="Map">
-					<div class="Map_title">
-						<span class="pull-left">公司地图</span>
+				<div class="message">
+					<div class="message_title">
+						<span class="pull-left">在线留言</span>
 						<div class="clearfix"></div>
 					</div>
-					<div class="Map_main">
-						<div id="allmap"></div>
+					<div class="message_main">
+						<p class="article_info">留言<span>(10)</span></p>
+						<ul class="list-unstyled">
+							<li class="clearfix">
+								<p>有一天他会身披金甲圣衣，脚踏七色云彩来娶我，我猜中了前头，却没猜到这结局。</p>
+								<button type="button" class="pull-right btn btn-info returnback">回复</button>								
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -88,5 +94,21 @@
             $('.mail').html(''+data.postcode+'');
         }
     }); 
+    $.ajax({
+    	url:'/feedback/list.json',
+        type: "get",
+        dataType: "json",
+        data: '',
+        success: function(data){
+            console.log(data);
+        }
+    })
+    $('.returnback').click(function(){
+    	var str='';
+    	str+='<div class="clearfix"><textarea style="width: 100%"></textarea>';
+		str+='<button type="button" class="pull-right btn btn-info pinglun">评论</button></div>';
+		//$(this).append(str);
+		$(str).insertAfter($(this));
+    });
 </script>
 </html>

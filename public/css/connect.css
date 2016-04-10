@@ -1,16 +1,16 @@
-.Contacts_us,.Map{
+.Contacts_us,.message{
 	margin-bottom: 15px;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 }
-.Contacts_title,.Map_title{
+.Contacts_title,.message_title{
 	height: 30px;
 	line-height: 30px;
 	background-color: #f3f3f3;
 	border-bottom: 1px solid #999;
 }
-.Contacts_title span,.Map_title span{
+.Contacts_title span,.message_title span{
 	width: 100px;
 	text-align: center;
 	background-color: #ffffff;
@@ -19,6 +19,9 @@
 .Contacts_title a{
 	padding-right: 15px;
 }
-.Contacts_main,.Map_main{
+.Contacts_main,.message_main{
 	padding: 20px;
+}
+.article_info span{
+	color: #ff0000;
 }

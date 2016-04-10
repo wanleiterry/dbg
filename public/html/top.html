@@ -1,7 +1,7 @@
 <div class="hidden-xs">
 	<div class="container top">
 		<p>
-			<span class="pull-left">您好，欢迎来到中国供应商！</span>
+			<span class="pull-left">您好，欢迎来到宁波天欧装饰有限公司！</span>
 			<span class="pull-right">
 				<a href="#">企业资质</a>|
 				<a href="#">产品地图</a>|
@@ -11,12 +11,12 @@
 		</p>
 		<div class="header">
 			<div class="pull-left company_info">
-				<h2>大表哥有限公司</h2>
+				<h2>宁波天欧装饰有限公司</h2>
 				<p>主营产品：装潢设计、檐口线脚、砂岩、集成吊顶</p>
 			</div>
 			<div class="connect_us pull-right">
 				<img src="../images/phone.png">
-				<span>0576-12345678</span>
+				<span>0574-88131725</span>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -111,3 +111,28 @@
 		</div>
 	</div>
 </div>
+
+<div class="side">
+	<ul>
+		<li><a href="#"><div class="sidebox"><img src="../images/side_icon01.png">客服中心</div></a></li>
+		<li><a href="#"><div class="sidebox"><img src="../images/side_icon02.png">客户案例</div></a></li>
+		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="../images/side_icon04.png">QQ客服</div></a></li>
+		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="../images/side_icon03.png">新浪微博</div></a></li>
+		<li style="border:none;"><a href="javascript:goTop();" class="sidetop"><img src="../images/side_icon05.png"></a></li>
+	</ul>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".side ul li").hover(function(){
+			$(this).find(".sidebox").stop().animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})	
+		},function(){
+			$(this).find(".sidebox").stop().animate({"width":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})	
+		});
+		
+	});
+
+	//回到顶部
+	function goTop(){
+		$('html,body').animate({'scrollTop':0},600);
+	}
+</script>
