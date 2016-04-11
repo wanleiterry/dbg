@@ -92,24 +92,6 @@
 			});
 		}
 		loadtype();
-		$('.remove').on('click',function(){
-			var id=$(this).attr("id");
-			$.ajax({
-				url:'/admin/case/'+id+'.json',
-				type: "delete",
-				dataType: "json",
-				data: '',
-				success: function(data){
-					console.log(data);
-					if(data.status==true){
-						loadtype();
-					}
-					else{
-						alert('删除失败！！');
-					}
-				}
-			});
-		});
 		$(".addtype").click(function(){
 			$(".addnew_type").show();
 		});
@@ -121,7 +103,7 @@
 				'name':$('#type').val()
 			}
 			$.ajax({
-				url:'/admin/cate/create.json',
+				url:'/admin/case/create.json',
 				type: "post",
 				dataType: "json",
 				data: param,
