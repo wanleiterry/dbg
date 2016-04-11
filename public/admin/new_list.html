@@ -230,7 +230,7 @@
 	$(function(){	
 		loadlist();
 		$('#ok').click(function(){
-			var id=$('.change_news_id').text();
+			var id=$('.change_news_id').html();
 			$.ajax({
 				url: '/admin/news/'+id+'.json',
 				type:"put",

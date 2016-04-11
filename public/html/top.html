@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="../css/owl.carousel.css">
+<script type="text/javascript" src="../js/owl.carousel.min.js"></script>
 <div class="hidden-xs">
 	<div class="container top">
 		<p>
@@ -44,6 +46,27 @@
 		    </nav>
 	    </div>
 	</div>
+	<div class="container">
+		<div class="owl-carousel">
+		    <div class="item" style='height: 300px'><img src='../images/pic1.jpg'></div>
+		    <div class="item" style='height: 300px'><img src='../images/pic2.jpg'></div>
+		    <div class="item" style='height: 300px'><img src='../images/pic3.jpg'></div>
+		    <div class="item" style='height: 300px'><img src='../images/pic4.jpg'></div>
+		    <div class="item" style='height: 300px'><img src='../images/pic5.jpg'></div>
+		</div>
+	</div>
+	<script>
+		var owl = $('.owl-carousel');
+		owl.owlCarousel({
+		    items:1,
+		    loop:true,
+		    margin:0,
+		    autoplay:true,
+		    autoplayTimeout:1000,
+		    autoplayHoverPause:true,
+		    height:50
+		});
+	</script>
 </div>
 <div class="container">    	
     <div class="clearfix web_nav">
@@ -71,9 +94,9 @@
 <script>
 	$(function() {
 		$(".navbar-nav li").hover(function(){
-			$(this).find("a").css({"background-color":"#7f0202","color":"#fff"})
+			$(this).find("a").css({"background-color":"#55b9f8","color":"#fff"})
 		},function(){
-			$(this).find("a").css({"background-color":"#ff0000","color":"#fff"})
+			$(this).find("a").css({"background-color":"#8cd3ff","color":"#fff"})
 		})
 	})
 </script>
@@ -116,8 +139,7 @@
 	<ul>
 		<li><a href="#"><div class="sidebox"><img src="../images/side_icon01.png">客服中心</div></a></li>
 		<li><a href="#"><div class="sidebox"><img src="../images/side_icon02.png">客户案例</div></a></li>
-		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="../images/side_icon04.png">QQ客服</div></a></li>
-		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="../images/side_icon03.png">新浪微博</div></a></li>
+		<li><a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=814448777&site=qq&menu=yes"><div class="sidebox"><img src="../images/side_icon04.png">QQ客服</div></a></li>
 		<li style="border:none;"><a href="javascript:goTop();" class="sidetop"><img src="../images/side_icon05.png"></a></li>
 	</ul>
 </div>

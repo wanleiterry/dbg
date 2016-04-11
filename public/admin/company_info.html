@@ -48,4 +48,20 @@
 <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
+<script>
+	function loadinfo(){		
+		$.ajax({
+			url:'/company.json',			
+			type:"get",
+			dataType:"json",
+			data:'',
+			success:function(data){
+				console.log(data);
+			}
+		})
+	}
+	$(function(){
+		loadinfo();
+	})
+</script>
 </html>

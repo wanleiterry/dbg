@@ -49,7 +49,19 @@
 <script type="text/javascript">$("#header").load("header.html");</script>
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script>
+	function loadinfo(){		
+		$.ajax({
+			url:'/admin/user.json',			
+			type:"get",
+			dataType:"json",
+			data:'',
+			success:function(data){
+				console.log(data);
+			}
+		})
+	}
 	$(function(){
+		loadinfo();
 		$("#cancel").click(function(){
 			$('input').val('');
 		});
