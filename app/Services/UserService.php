@@ -47,7 +47,8 @@ class UserService {
 	 * @param array $params (originPasswd, newPasswd, confirmPasswd)
 	 */
 	public function putPasswd($params) {
-		$passwd = User::where('username', $this->username)->pluck('password');
+		$user = User::select('password')->where('username', $this->username)->first();
+		$passwd = $user->password;//dd($this->hasher->check($params['originPasswd'], $passwd));
 		if(isset($params['originPasswd']) && $params['originPasswd'] && $this->hasher->check($params['originPasswd'], $passwd)) {
 			if(isset($params['newPasswd']) && $params['newPasswd']) {
 				if(isset($params['confirmPasswd']) && $params['confirmPasswd']) {
