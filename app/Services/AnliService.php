@@ -22,6 +22,9 @@ class AnliService {
         			->skip($offset)
 			        ->take($limit)
 			        ->get();
+		foreach ($anlis as $anli) {
+			$anli->pic = env('PIC_DOMAIN') . $anli->pic;
+		}
         return $anlis;
     }
 
@@ -31,6 +34,7 @@ class AnliService {
         			->select('anli.id', 'category.name as cate_name', 'anli.title', 'anli.pic', 'anli.content', 'anli.created_at', 'anli.updated_at')
         			->where('anli.id', $id)
         			->first();
+		$anli->pic = env('PIC_DOMAIN') . $anli->pic;
         return $anli;
     }
 

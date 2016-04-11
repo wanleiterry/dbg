@@ -18,12 +18,16 @@ class NewsService {
         $offset = isset($params['offset']) ? $params['offset'] : $this->offset;
         $limit = isset($params['limit']) ? $params['limit'] : $this->limit;
         $news = $this->model->skip($offset)->take($limit)->get();
+        foreach ($news as $n) {
+            $n->pic = env('PIC_DOMAIN') . $n->pic;
+        }
         return $news;
     }
 
     public function get($id)
     {
         $news = $this->model->where('id', $id)->first();
+        $news->pic = env('PIC_DOMAIN') . $news->pic;
         return $news;
     }
 
