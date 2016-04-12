@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserService {
 	
-	public function __construct(HasherContract $hasher) {//dd(Auth::user());//dd(Session::get('user'));
+	public function __construct(HasherContract $hasher) {
 		$this->hasher = $hasher;
 		$this->username = 'admin';
 	}

@@ -35,7 +35,6 @@ Route::group(['prefix' => 'auth'], function () {
 	//登录接口
 	Route::post('login.json', $Auth . 'postLogin');
 	//登出
-//	Route::get('logout', $Auth . 'getLogout');
 	Route::get('logout.json', $Auth . 'getLogout');
 	//登录
 	Route::get('login', $Auth . 'getLogin');

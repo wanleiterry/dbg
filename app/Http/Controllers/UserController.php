@@ -18,7 +18,7 @@ class UserController extends Controller
 		$this->userService = $userService;
     }
 
-    public function showUser(Request $request) {dd($request->user());
+    public function showUser(Request $request) {
     	$result = $this->userService->getUser();
     	return Response::json($result, 200);
     }

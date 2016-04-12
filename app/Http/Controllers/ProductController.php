@@ -32,7 +32,7 @@ class ProductController extends Controller {
     }
 
     public function putProduct($id, Request $request)
-    {
+    {dd($request->all());
         $result = $this->productService->put($id, $request->all());
         return Response::json($result, 200);
     }
