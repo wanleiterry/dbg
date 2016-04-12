@@ -17,8 +17,10 @@ class FeedbackService {
     {
         $offset = isset($params['offset']) ? $params['offset'] : $this->offset;
         $limit = isset($params['limit']) ? $params['limit'] : $this->limit;
+        $data['_count'] = $this->model->count();
         $feedbacks = $this->model->skip($offset)->take($limit)->get();
-        return $feedbacks;
+        $data['data'] = $feedbacks;
+        return $data;
     }
 
     public function get($id)

@@ -17,6 +17,7 @@ class AnliService {
     {
     	$offset = isset($params['offset']) ? $params['offset'] : $this->offset;
     	$limit = isset($params['limit']) ? $params['limit'] : $this->limit;
+    	$data['_count'] = $this->model->count();
         $anlis = $this->model->leftJoin('category', 'anli.category_id', '=', 'category.id')
         			->select('anli.id', 'category.name as cate_name', 'anli.title', 'anli.pic', 'anli.content', 'anli.created_at', 'anli.updated_at')
         			->skip($offset)
@@ -25,7 +26,8 @@ class AnliService {
 		foreach ($anlis as $anli) {
 			$anli->pic = env('PIC_DOMAIN') . $anli->pic;
 		}
-        return $anlis;
+		$data['data'] = $anlis;
+        return $data;
     }
 
     public function get($id)

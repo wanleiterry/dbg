@@ -17,11 +17,13 @@ class NewsService {
     {
         $offset = isset($params['offset']) ? $params['offset'] : $this->offset;
         $limit = isset($params['limit']) ? $params['limit'] : $this->limit;
+        $data['_count'] = $this->model->count();
         $news = $this->model->skip($offset)->take($limit)->get();
         foreach ($news as $n) {
             $n->pic = env('PIC_DOMAIN') . $n->pic;
         }
-        return $news;
+        $data['data'] = $news;
+        return $data;
     }
 
     public function get($id)

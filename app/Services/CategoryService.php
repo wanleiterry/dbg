@@ -18,8 +18,10 @@ class CategoryService {
     {
     	$offset = isset($params['offset']) ? $params['offset'] : $this->offset;
     	$limit = isset($params['limit']) ? $params['limit'] : $this->limit;
+    	$data['_count'] = $this->model->count();
         $cates = $this->model->skip($offset)->take($limit)->get();//dd($cates);
-        return $cates;
+        $data['data'] = $cates;
+        return $data;
     }
 
     public function get($id)
