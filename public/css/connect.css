@@ -1,4 +1,4 @@
-.Contacts_us,.message{
+.Contacts_us,.message,{
 	margin-bottom: 15px;
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
@@ -24,4 +24,14 @@
 }
 .article_info span{
 	color: #ff0000;
+}
+.message_detail{
+	padding: 10px;
+}
+.message_detail li{
+	border:1px solid #ddd;
+	margin-bottom: 5px;
+}
+#add_message{
+	margin-right: 10px;
 }

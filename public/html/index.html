@@ -97,18 +97,19 @@
         }
     });
     $.ajax({
-        url: '/case/list.json',
+        url: '/case/list.json?limit=8&offset=0',
         type: "get",
         dataType: "json",
         data: '',
         success: function(data){
         	console.log(data);
+            var json=data.data;
             var str='';
-			for(var i=0;i<data.length;i++){
+			for(var i=0;i<json.length;i++){
 				str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-				str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+data[i].id+')">';
-				str+='<img src="'+data[i].pic+'" alt="...">';
-				str+='<div class="caption"><p class="text-center">'+data[i].title+'</p>';
+				str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
+				str+='<img src="'+json[i].pic+'" alt="...">';
+				str+='<div class="caption"><p class="text-center">'+json[i].title+'</p>';
 				str+='</div></div></div>';
 			}
 			$('.product_new').html(str);

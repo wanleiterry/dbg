@@ -26,7 +26,7 @@
 						</ul>
                         <div class="page_select clearfix">
                             <div class="pull-left record">
-                                <p>共<span>236</span>条记录</p>
+                                <p>共<span id='total'>236</span>条记录</p>
                             </div>
                             <div class="pull-right">
                                 <nav>
@@ -65,16 +65,18 @@
 <script>
 	$(function(){
 		$.ajax({
-			url: '/news/list.json',
+			url: '/news/list.json?limit=10&offset=0',
 			type: "get",
 			dataType: "json",
 			data: '',
 			success: function(data){
 				console.log(data);
+				$('#total').html(''+data._count+'')
+				var json=data.data;
 				var str = "";
-				for(var i=0;i<data.length;i++){
-					var time=data[i].updated_at.substr(0,10);
-					str+='<li><a href="news_detail.html?id='+data[i].id+'">'+data[i].title+'';
+				for(var i=0;i<json.length;i++){
+					var time=json[i].created_at.substr(0,10);
+					str+='<li><a href="news_detail.html?id='+json[i].id+'">'+json[i].title+'';
 					str+='<span class="pull-right">'+time+'</span>';
 					str+='<div class="clearfix"></div></a></li>';
 				}

@@ -213,14 +213,14 @@
 			dataType: "json",
 			data: '',
 			success: function(data){
-				console.log(data);
+				var json=data.data;
 				var str='';
-				for(var i=0;i<data.length;i++){
-					str+='<tr><td><p>'+data[i].title+'</p></td>';
-					str+='<td>'+data[i].desc+'</td>';
+				for(var i=0;i<json.length;i++){
+					str+='<tr><td><p>'+json[i].title+'</p></td>';
+					str+='<td>'+json[i].desc+'</td>';
 					str+='<td>2016-04-06 11:16:45</td>';
-					str+='<td><p><a class="editnews" onclick="edit('+data[i].id+')" data-toggle="modal"  data-target=".changenews">编辑</a>';
-					str+='<span>|</span><a class="deletenews" onclick="deletenews('+data[i].id+')">删除</a></p></td></tr>';
+					str+='<td><p><a class="editnews" onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changenews">编辑</a>';
+					str+='<span>|</span><a class="deletenews" onclick="deletenews('+json[i].id+')">删除</a></p></td></tr>';
 				}
 				$('#goods-list').html(str);
 			}

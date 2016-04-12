@@ -214,7 +214,7 @@
 			data: '',
 			success: function(data){
 				//$('.total_num').html(''+data._count+'');
-				var json=data;
+				var json=data.data;
 				var str='';
 				for(var i=0;i<json.length;i++){
 					str+='<tr><td><img class="goods-image" src="'+json[i].pic+'" width="60px" height="60px"></td>';

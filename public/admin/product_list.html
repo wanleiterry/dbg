@@ -211,7 +211,7 @@
 					str+='<td><p>'+json[i].name+'</p></td>';
 					str+='<td><p>'+json[i].desc+'</p></td>';
 					str+='<td>'+json[i].updated_at+'</td>';
-					str+='<td><p><a onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changegoods"> 编辑</a>';
+					str+='<td><p><a onclick="edit('+json[i].id+')" data-toggle="modal" data-target=".changegoods"> 编辑</a>';
 					str+='<span>|</span><a class="delete" onclick="delnews('+json[i].id+')">删除</a></p></td></tr>';
 				}
 				$('#goods-list').html(str);

@@ -58,18 +58,86 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="message_main">
-						<p class="article_info">留言<span>(10)</span></p>
-						<ul class="list-unstyled">
+						<p class="article_info">留言<span id="message_count">(10)</span></p>
+						<ul class="list-unstyled message_detail">
 							<li class="clearfix">
-								<p>有一天他会身披金甲圣衣，脚踏七色云彩来娶我，我猜中了前头，却没猜到这结局。</p>
-								<button type="button" class="pull-right btn btn-info returnback">回复</button>								
+								<p>姓名：大表哥&nbsp;&nbsp;</p>		
+								<p>qq:1585454&nbsp;&nbsp;手机号：15516&nbsp;&nbsp;邮箱:56546@qq.com</p>			
+								<p>标题：事大拉手</p>
+								<p>内容：</p>
 							</li>
 						</ul>
+						<div class="clearfix">
+							<span class="pull-right">
+								<button type="button" id="add_message" class="btn btn-default" data-toggle="modal" data-target=".live_message">留言</button>
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="modal fade live_message" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+	        	<div class="modal-header">
+	        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        		<h4>在线留言</h4>
+	      		</div>
+            	<form class="form-horizontal" enctype="muitipart/form-data">
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">姓名</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="name" placeholder="姓名">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">qq</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="qq" placeholder="qq">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">手机号</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="mobile" placeholder="手机号">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">邮箱</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="email" placeholder="邮箱">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">标题</label>
+				    	<div class="col-sm-10">
+				      		<input type="text" class="form-control" id="title" placeholder="标题">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label">内容</label>
+				    	<div class="col-sm-10">
+				      		<textarea class="form-control" id="content"></textarea>
+				    	</div>
+				  	</div>				  	
+				  	<div class="form-group">
+				    	<label class="col-sm-2 control-label"></label>
+				    	<div class="col-sm-10">
+				      		<ul class="list-inline">
+				      			<li>
+				      				<button type="button" id="sure" class="btn btn-default">留言</button>
+				      			</li>
+				      			<li>
+				      				<button type="button" id="cancel" class="btn btn-default">取消</button>
+				      			</li>
+				      		</ul>
+				    	</div>
+				  	</div>
+				</form>
+            </div>
+        </div>
+    </div>
 	<div id="bottom"></div>
 </div>
 </body>
@@ -79,34 +147,78 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
-    $.ajax({
-        url: '/company.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-            $('.company_name').html(''+data.name+'');
-            $('.person').html(''+data.realname+'');
-            $('.telphone').html(''+data.telephone+'');
-            $('.fax').html(''+data.tax+'');
-            $('.address').html(''+data.address+'');
-            $('.mail').html(''+data.postcode+'');
-        }
-    }); 
-    $.ajax({
-    	url:'/feedback/list.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-        }
+	function loadmessage(){		
+	    $.ajax({
+	    	url:'/feedback/list.json?limit=8&offset=0',
+	        type: "get",
+	        dataType: "json",
+	        data: '',
+	        success: function(data){
+	        	console.log(data);
+	        	$('#message_count').html('('+data._count+')')
+	        	var json=data.data;
+	        	var str='';
+	        	for(var i=0;i<json.length;i++){
+	        		str+='<li class="clearfix"';
+	        		str+='<p>姓名:'+json[i].name+'&nbsp;&nbsp;</p>';		
+	        		str+='<p>qq:'+json[i].qq+'&nbsp;&nbsp;手机号:'+json[i].mobile+'&nbsp;&nbsp;邮箱:'+json[i].email+'</p>';						
+	        		str+='<p>标题:'+json[i].title+'</p><p>内容:'+json[i].content+'</p>';
+	        	}
+	        	$('.message_detail').html(str);
+	        }
+	    })
+	}
+    $(function () {
+    	loadmessage();
+    	$.ajax({
+	        url: '/company.json',
+	        type: "get",
+	        dataType: "json",
+	        data: '',
+	        success: function(data){
+	            $('.company_name').html(''+data.name+'');
+	            $('.person').html(''+data.realname+'');
+	            $('.telphone').html(''+data.telephone+'');
+	            $('.fax').html(''+data.tax+'');
+	            $('.address').html(''+data.address+'');
+	            $('.mail').html(''+data.postcode+'');
+	        }
+	    }); 
+	    $("#cancel").click(function(){
+	    	$('.close').click();
+	    })
+	    $('#sure').click(function(){
+	    	var param={
+	    		'content':$('#content').val(),
+	    		'email':$('#email').val(),
+	    		'mobile':$('#mobile').val(),
+	    		'name':$('#name').val(),
+	    		'qq':$('#qq').val(),
+	    		'title':$('#title').val()
+	    	}
+	    	if($('#qq').val()==''||$('#content').val()==''||$('#email').val()==''||$('#mobile').val()==''||$('#name').val()==''){
+	    		alert('请填写有效地联系方式和内容方便联系您！！');
+	    		return false;
+	    	}
+	    	else{
+	    		$.ajax({
+	    			url:'/feedback/create.json',
+			        type: "post",
+			        dataType: "json",
+			        data: param,
+			        success:function(data){
+			        	console.log(data);
+			        	if(data.status==true){
+			        		$('.close').click();
+			        		loadmessage();
+			        	}
+			        	else{
+			        		alert('留言失败！！');
+			        	}
+			        }
+	    		})
+	    	}
+	    })
     })
-    $('.returnback').click(function(){
-    	var str='';
-    	str+='<div class="clearfix"><textarea style="width: 100%"></textarea>';
-		str+='<button type="button" class="pull-right btn btn-info pinglun">评论</button></div>';
-		//$(this).append(str);
-		$(str).insertAfter($(this));
-    });
 </script>
 </html>

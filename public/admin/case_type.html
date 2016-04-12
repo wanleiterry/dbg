@@ -127,13 +127,15 @@
 			dataType: "json",
 			data: '',
 			success: function(data){
+				console.log(data);
+				var json=data.data;
 				var str='';
-				for(var i=0;i<data.length;i++){
-					str+='<li class="clearfix"><div class="pull-left"><span>'+data[i].name+'</span></div>';
+				for(var i=0;i<json.length;i++){
+					str+='<li class="clearfix"><div class="pull-left"><span>'+json[i].name+'</span></div>';
 					str+='<div class="pull-right"><ul class="list-inline">';
-					str+='<li><button type="button" class="change btn btn-default" data-toggle="modal"  data-target=".changetype" onclick="changetype('+data[i].id+')">修改';
+					str+='<li><button type="button" class="change btn btn-default" data-toggle="modal"  data-target=".changetype" onclick="changetype('+json[i].id+')">修改';
 					str+='<span class="glyphicon glyphicon-pencil"></span></button></li>';
-					str+='<li><button type="button" class="btn btn-default remove" id="'+data[i].id+'" onclick="removetype('+data[i].id+')">删除';
+					str+='<li><button type="button" class="btn btn-default remove" id="'+json[i].id+'" onclick="removetype('+json[i].id+')">删除';
 					str+='<span class="glyphicon glyphicon-remove"></span></button></li></ul></div></li>';
 				}
 				$('.casetype').html(str);
