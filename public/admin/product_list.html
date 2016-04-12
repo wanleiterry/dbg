@@ -243,8 +243,6 @@
 			dataType: "json",
 			data: '',
 			success: function(data){
-				console.log(data);
-				console.log(id);
 				$('.change_product_id').html(''+id+'');
 				$('#title').val(''+data.name+'');
 				$('#desc').val(''+data.desc+'');

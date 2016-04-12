@@ -31,6 +31,7 @@
         </ul>
         <ul class="list-unstyled product_type"></ul>
   	</div>
+    <div id="allmap"></div>
 </div>
 <script>    
     $.ajax({
@@ -46,4 +47,10 @@
             $('.product_type').html(str);
         }
     })
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=G1cZgTGRBWVBoEfVhCcKtvaQS1GVy4PU"></script>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");  // 创建Map实例
+    map.centerAndZoom("宁波",15);      // 初始化地图,用城市名设置地图中心点
 </script>

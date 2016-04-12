@@ -85,7 +85,6 @@
         dataType: "json",
         data: '',
         success: function(data){
-            console.log(data);
             $('.company_name').html(''+data.name+'');
             $('.person').html(''+data.realname+'');
             $('.telphone').html(''+data.telephone+'');
@@ -100,7 +99,6 @@
         dataType: "json",
         data: '',
         success: function(data){
-            console.log(data);
         }
     })
     $('.returnback').click(function(){

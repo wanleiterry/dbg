@@ -13,7 +13,7 @@
 <div class="main clearfix container">
 	<div id="left"></div>
 	<div class="rt_wrap content mCustomScrollbar">
-		<button type="button" class="btn btn-danger addtype">
+		<button type="button" class="btn btn-danger addtype" data-toggle="modal"  data-target=".addtype">
 			<span class='glyphicon glyphicon-plus'></span>增加分类
 		</button>
 		<ul class="list-unstyled casetype">
@@ -22,23 +22,62 @@
 				<div class="pull-right"></div>
 			</li>
 		</ul>
-		<div class="addnew_type">
+	</div>
+</div>
+<div class="modal fade addtype" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4>分类修改</h4>
+			</div>
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">新添分类</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="type" placeholder="分类">
+						<input type="text" class="form-control" id="type" placeholder="标题">
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<ul class="list-inline">
 							<li>				      				
-			      				<button type="button" class="btn btn-default" id="ok">保存</button>
-			      			</li>
-			      			<li>				      				
-			      				<button type="button" class="btn btn-default" id="quxiao">取消</button>
-			      			</li>
+								<button type="button" class="btn btn-default" id="ok">保存</button>
+							</li>
+							<li>				      				
+								<button type="button" class="btn btn-default" id='cancel'>取消</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade changetype" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4>分类修改</h4>
+			</div>
+			<form class="form-horizontal">
+				<span id='case_type' style="display: none"></span>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">分类</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="change_cate" placeholder="标题">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<ul class="list-inline">
+							<li>				      				
+								<button type="button" class="btn btn-default" id="edit_cate">保存</button>
+							</li>
+							<li>				      				
+								<button type="button" class="btn btn-default" id='quxiao'>取消</button>
+							</li>
 						</ul>
 					</div>
 				</div>
@@ -54,7 +93,7 @@
 <script>
 	function removetype(id){
 		$.ajax({
-			url:'/admin/case/'+id+'.json',
+			url:'/admin/cate/'+id+'.json',
 			type: "delete",
 			dataType: "json",
 			data: '',
@@ -69,28 +108,39 @@
 			}
 		});
 	};
-	$(function(){
-		function loadtype(){
-			$.ajax({
-				url:'/cate/list.json',
-				type: "get",
-				dataType: "json",
-				data: '',
-				success: function(data){
-					console.log(data);
-					var str='';
-					for(var i=0;i<data.length;i++){
-						str+='<li class="clearfix"><div class="pull-left"><span>'+data[i].name+'</span></div>';
-						str+='<div class="pull-right"><ul class="list-inline">';
-						str+='<li><button type="button" class="btn btn-default">修改';
-						str+='<span class="glyphicon glyphicon-pencil"></span></button></li>';
-						str+='<li><button type="button" class="btn btn-default remove" id="'+data[i].id+'" onclick="removetype('+data[i].id+')">删除';
-						str+='<span class="glyphicon glyphicon-remove"></span></button></li></ul></div></li>';
-					}
-					$('.casetype').html(str);
+	function changetype(id){
+		$('#case_type').html(''+id+'');
+		$.ajax({
+			url:'/cate/'+id+'.json',
+			type: "get",
+			dataType: "json",
+			data: '',
+			success:function(data){
+				$('#change_cate').val(''+data.name+'');
+			}
+		})
+	}
+	function loadtype(){
+		$.ajax({
+			url:'/cate/list.json',
+			type: "get",
+			dataType: "json",
+			data: '',
+			success: function(data){
+				var str='';
+				for(var i=0;i<data.length;i++){
+					str+='<li class="clearfix"><div class="pull-left"><span>'+data[i].name+'</span></div>';
+					str+='<div class="pull-right"><ul class="list-inline">';
+					str+='<li><button type="button" class="change btn btn-default" data-toggle="modal"  data-target=".changetype" onclick="changetype('+data[i].id+')">修改';
+					str+='<span class="glyphicon glyphicon-pencil"></span></button></li>';
+					str+='<li><button type="button" class="btn btn-default remove" id="'+data[i].id+'" onclick="removetype('+data[i].id+')">删除';
+					str+='<span class="glyphicon glyphicon-remove"></span></button></li></ul></div></li>';
 				}
-			});
-		}
+				$('.casetype').html(str);
+			}
+		});
+	}
+	$(function(){		
 		loadtype();
 		$(".addtype").click(function(){
 			$(".addnew_type").show();
@@ -103,7 +153,7 @@
 				'name':$('#type').val()
 			}
 			$.ajax({
-				url:'/admin/case/create.json',
+				url:'/admin/cate/create.json',
 				type: "post",
 				dataType: "json",
 				data: param,
@@ -111,10 +161,41 @@
 					console.log(data);
 					if(data.status==true){
 						$(".addnew_type").hide();
+						$('.close').click();
+						$('.modal-backdrop').remove();
 						loadtype();
 					}
 					else{
 						alert('分类创建失败');
+					}
+				}
+			});
+		});
+		$('#cancel').click(function(){
+			$('.close').click();
+			$('.modal-backdrop').remove();
+		});
+		$('#quxiao').click(function(){
+			$('.close').click();
+		})
+		$('#edit_cate').click(function(){
+			var id=$('#case_type').html();
+			var param={
+				'name':$('#change_cate').val()
+			}
+			$.ajax({
+				url:'/admin/cate/'+id+'.json',
+				type: "put",
+				dataType: "json",
+				data: param,
+				success: function(data){
+					console.log(data);
+					if(data.status==true){
+						$('.close').click();
+						loadtype();
+					}
+					else{
+						alert('修改失败');
 					}
 				}
 			});
