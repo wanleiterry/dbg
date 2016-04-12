@@ -50,19 +50,31 @@ class ProductService {
     }
 
     public function put($id, $params)
-    {
+    {//dd($params);
     	$upd = array();
     	if(isset($params['name'])) {
     		$upd['name'] = $params['name'];
     	}
-    	if(isset($params['pic'])) {
-    		$upd['pic'] = $params['pic'];
-    	}
+//     	if(isset($params['pic'])) {
+//     		$upd['pic'] = $params['pic'];
+//     	}
     	if(isset($params['content'])) {
     		$upd['content'] = $params['content'];
     	}
     	if(isset($params['desc'])) {
     		$upd['desc'] = $params['desc'];
+    	}
+    	if(isset($params['myFile'])) {
+    		$file = $params['myFile'];
+    		if($file->isValid()) {
+    			$targetFolder = env('PIC_DOMAIN');
+    			$clientName = $file->getClientOriginalName();
+    			if($file->move('uploads/pictures')) {
+    				$upd['pic'] = $clientName;
+    			}
+    		} else {
+    			return array('status' => false, 'result' => '所上传的文件无效');
+    		}
     	}
 		if($this->model->where('id', $id)->update($upd)) {
 			return array('status' => true);

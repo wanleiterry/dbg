@@ -50,7 +50,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 
     //产品
     Route::post('product/create.json', 'ProductController@postProduct');
-    Route::put('product/{id}.json', 'ProductController@putProduct');
+//     Route::put('product/{id}.json', 'ProductController@putProduct');
+    Route::post('product/{id}.json', 'ProductController@putProduct');
     Route::delete('product/{id}.json', 'ProductController@delProduct');
 
     //新闻

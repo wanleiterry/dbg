@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ProductService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ProductController extends Controller {
 
@@ -32,7 +33,12 @@ class ProductController extends Controller {
     }
 
     public function putProduct($id, Request $request)
-    {dd($request->all());
+    {
+//     	dd($request->all());
+//     	dd(Input::file('myFile'));
+    	//dd($__FILES['myFile']);
+    	//dd(Input::file('myfile'));
+    	//dd($request->hasFile('myfile'));
         $result = $this->productService->put($id, $request->all());
         return Response::json($result, 200);
     }
