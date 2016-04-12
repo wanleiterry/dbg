@@ -32,14 +32,9 @@ class ProductController extends Controller {
         return Response::json($result, 200);
     }
 
-    public function putProduct($id, Request $request)
+    public function updateProduct($id, Request $request)
     {
-//     	dd($request->all());
-//     	dd(Input::file('myFile'));
-    	//dd($__FILES['myFile']);
-    	//dd(Input::file('myfile'));
-    	//dd($request->hasFile('myfile'));
-        $result = $this->productService->put($id, $request->all());
+        $result = $this->productService->updateProduct($id, $request->all());
         return Response::json($result, 200);
     }
 

@@ -49,15 +49,12 @@ class ProductService {
 		}
     }
 
-    public function put($id, $params)
-    {//dd($params);
+    public function updateProduct($id, $params)
+    {
     	$upd = array();
     	if(isset($params['name'])) {
     		$upd['name'] = $params['name'];
     	}
-//     	if(isset($params['pic'])) {
-//     		$upd['pic'] = $params['pic'];
-//     	}
     	if(isset($params['content'])) {
     		$upd['content'] = $params['content'];
     	}
@@ -69,7 +66,7 @@ class ProductService {
     		if($file->isValid()) {
     			$targetFolder = env('PIC_DOMAIN');
     			$clientName = $file->getClientOriginalName();
-    			if($file->move('uploads/pictures')) {
+    			if($file->move('uploads/pictures', $clientName)) {
     				$upd['pic'] = $clientName;
     			}
     		} else {
