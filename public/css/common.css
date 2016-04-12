@@ -30,7 +30,7 @@ a,a:hover{
     margin-bottom: 15px;
 }
 .navgation{
-	background-color: #ff0000;
+	background-color: #8cd3ff;
 	height: 40px;
 }
 .navgation .navbar-collapse{
@@ -145,7 +145,7 @@ a,a:hover{
 }
 /*底部共用部分*/
 #bottom .container-fluid{
-	background-color: #ff0000;
+	background-color: #8cd3ff;
 	height: 45px;
 	line-height: 45px;
 }

@@ -19,6 +19,9 @@ class ProductService {
     	$limit = isset($params['limit']) ? $params['limit'] : $this->limit;
     	$data['_count'] = $this->model->count();
         $products = $this->model->skip($offset)->take($limit)->get();
+		foreach ($products as $p) {
+			$p->pic = env('PIC_DOMAIN') . $p->pic;
+		}
         $data['data'] = $products;
         return $data;
     }
@@ -26,6 +29,7 @@ class ProductService {
     public function get($id)
     {
         $product = $this->model->where('id', $id)->first();
+		$product->pic = env('PIC_DOMAIN') . $product->pic;
         return $product;
     }
 

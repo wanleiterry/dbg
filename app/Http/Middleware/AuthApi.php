@@ -3,7 +3,6 @@
 use App\Services\UserService;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
-// use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Response;
 
 class AuthApi {

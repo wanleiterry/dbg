@@ -32,7 +32,7 @@ class AuthController extends Controller
 //     *
 //     * @var string
 //     */
-   protected $redirectTo = '/admin/user.json';
+//   protected $redirectTo = '/admin/user.json';
 
     /**
      * Create a new authentication controller instance.
@@ -110,11 +110,5 @@ class AuthController extends Controller
     public function getLogout() {
     	Auth::logout();
     	return redirect()->guest('auth/login');
-    	
-//     	if(isset($_GET['runUrl'])){
-//     		return redirect()->guest('auth/login');
-//     	}
-    	
-//     	return Response::json(['success'=>true], 200);
     }
 }
