@@ -54,13 +54,13 @@ class CategoryService {
 
     public function remove($id) {
         if (Anli::where('category_id', $id)->count() > 0) {
+        	return array('status' => false, 'result' => '当前分类下有案例，不能删除');
+        } else {
             if ($this->model->where('id', $id)->delete()) {
                 return array('status' => true);
             } else {
                 return array('status' => false, 'result' => '删除失败');
             }
-        } else {
-            return array('status' => false, 'result' => '当前分类下有案例，不能删除');
         }
     }
 
