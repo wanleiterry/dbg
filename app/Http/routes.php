@@ -114,8 +114,8 @@ Route::group(['prefix' => 'case'], function()
 });
 
 Route::get('/', 'WelcomeController@index');
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-
-    Route::get('/home', 'HomeController@index');
-});
+//Route::group(['middleware' => 'web'], function () {
+//    Route::auth();
+//
+//    Route::get('/home', 'HomeController@index');
+//});
