@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\NewsService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
+use Redirect;
 
 class NewsController extends Controller {
 
