@@ -65,9 +65,11 @@ class ProductService {
     		$file = $params['myFile'];
     		if($file->isValid()) {
     			$targetFolder = env('PIC_DOMAIN');
-    			$clientName = $file->getClientOriginalName();
-    			if($file->move('uploads/pictures', $clientName)) {
-    				$upd['pic'] = $clientName;
+//     			$clientName = $file->getClientOriginalName();
+    			$extension = $file->getClientOriginalExtension();
+				$newName = str_random(8).$extension;
+    			if($file->move('uploads/pictures', $newName)) {
+    				$upd['pic'] = $newName;
     			}
     		} else {
     			return array('status' => false, 'result' => '所上传的文件无效');

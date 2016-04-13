@@ -279,7 +279,8 @@
 			$(".close").click();
 		});
 		$('#ok').click(function(){
-			var id=$('.change_product_id').html();alert($('#myFile').val());
+			var id=$('.change_product_id').html();
+			$("#editForm").attr('action', '/admin/product/'+id+'.json').submit();
 			/*var param = {
 				'name':$('#title').val(),
 				'desc':$('#desc').val(),
@@ -303,7 +304,6 @@
 					}
 				}
 			});*/
-			$("#editForm").attr('action', '/admin/product/'+id+'.json').submit();
 			
 		});
 	})

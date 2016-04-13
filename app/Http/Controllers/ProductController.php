@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Services\ProductService;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Redirect;
 
 class ProductController extends Controller {
 
@@ -35,6 +35,11 @@ class ProductController extends Controller {
     public function updateProduct($id, Request $request)
     {
         $result = $this->productService->updateProduct($id, $request->all());
+        if($result['status']) {
+//         	\View::addExtension('html', 'php');
+//         	return view()->file('/admin/product_list.html');
+        	return Redirect::to('/admin/product_list.html');
+        }
         return Response::json($result, 200);
     }
 
