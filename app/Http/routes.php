@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 
     //新闻
     Route::post('news/create.json', 'NewsController@postNews');
-    Route::post('news/{id}.json', 'NewsController@putNews');
+    Route::post('news/{id}.json', 'NewsController@updateNews');
     Route::delete('news/{id}.json', 'NewsController@delNews');
 
     //公司信息
