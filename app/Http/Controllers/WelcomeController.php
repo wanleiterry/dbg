@@ -30,9 +30,9 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		return view('index');
-// 		\View::addExtension('html', 'php');
-// 		return view()->file('/html/about.html');
+// 		return view('index');
+		\View::addExtension('html', 'php');
+		return view()->file('/html/index.html');
 	}
 
 }
