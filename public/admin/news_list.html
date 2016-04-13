@@ -25,7 +25,8 @@
 				        <thead>
 					        <tr>
 					            <th style='width:15%'>标题</th>
-								<th style='width:45%'>内容</th>
+					            <th style='width:15%'>关键字</th>
+								<th style='width:30%'>内容</th>
 					            <th style='width:25%'>发布时间</a></th>
 					            <th style='width:15%'>管理</th>
 					        </tr>
@@ -86,11 +87,17 @@
 					<div class="col-sm-10">
 						<input type="email" class="form-control" id="editname" placeholder="Email" name='title'>
 					</div>
+				</div>			
+				<div class="form-group">
+					<label class="col-sm-2 control-label">关键字</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="editdesc" placeholder="关键字" name='desc'>
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">内容</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" id='editdesc' name='desc'>
+						<textarea class="form-control" id='editcontent' name='content'>
 							
 						</textarea>
 					</div>
@@ -129,6 +136,12 @@
 					<label class="col-sm-2 control-label">标题</label>
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="title" placeholder="标题" name='title'>
+					</div>
+				</div>				
+				<div class="form-group">
+					<label class="col-sm-2 control-label">关键字</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" id="desc" placeholder="关键字" name='desc'>
 					</div>
 				</div>
 				<div class="form-group">
@@ -194,6 +207,9 @@
             success: function(data){
                 console.log(data);
                 $('.change_news_id').html(''+id+'');
+                $('#editdesc').val(''+data.content+'');
+                $('#editcontent').val(''+data.desc+'');
+                $('#editname').val(''+data.title+'');
                 loadlist();
             }
         })
@@ -210,6 +226,7 @@
 				for(var i=0;i<json.length;i++){
 					str+='<tr><td><p>'+json[i].title+'</p></td>';
 					str+='<td>'+json[i].desc+'</td>';
+					str+='<td>'+json[i].content+'</td>';
 					str+='<td>2016-04-06 11:16:45</td>';
 					str+='<td><p><a class="editnews" onclick="edit('+json[i].id+')" data-toggle="modal"  data-target=".changenews">编辑</a>';
 					str+='<span>|</span><a class="deletenews" onclick="deletenews('+json[i].id+')">删除</a></p></td></tr>';
