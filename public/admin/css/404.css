@@ -1,0 +1,42 @@
+body{
+	margin: 0px auto;
+	width: 950px;
+	font: 11px "Lucida Grande",Arial,Verdana,sans-serif; 	
+	background: url(/admin/images/body_bg.jpg) #d4d4d4 repeat-x; padding-top:80px;
+}
+.error404_main{
+	position: relative;
+	margin: 31px 21px 0px;
+	width: 950px;
+	background: url(/admin/images/error404.jpg) no-repeat; 
+	height: 500px;
+}
+.main_txt {
+	position: absolute;
+	text-align: center;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	width: 150px;
+	padding-right: 0px;
+	display: block;
+	height: 63px;
+	color: #1d1d1d;
+	top: 223px;
+	padding-top: 2px;
+	left: 745px;
+}
+.main_txt span{
+	margin:  0px 0px 2px;
+	display: block;
+}
+.main_txt a{
+	color: #1d1d1d;
+	cursor: pointer;
+}
+.error404_guide {
+	position: relative;
+	background-color: #b4b4b4;
+	margin: 0px 21px;
+	width: 950px;
+	height: 84px;
+}
