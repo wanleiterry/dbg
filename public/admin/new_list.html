@@ -77,20 +77,20 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4>案例展示</h4>
+				<h4>咨询展示</h4>
 			</div>
-			<form class="form-horizontal">
-				<span class="change_news_id"></span>
+			<form class="form-horizontal" enctype="multipart/form-data" id="editForm" method="post" action="">
+				<span class="change_news_id" style='display: none'></span>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">标题</label>
 					<div class="col-sm-10">
-						<input type="email" class="form-control" id="editname" placeholder="Email">
+						<input type="email" class="form-control" id="editname" placeholder="Email" name='title'>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">内容</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" id='editdesc'>
+						<textarea class="form-control" id='editdesc' name='desc'>
 							
 						</textarea>
 					</div>
@@ -98,12 +98,7 @@
 				<div class="form-group">
 					<label for="inputPassword3" class="col-sm-2 control-label">图片</label>
 					<div class="col-sm-10">
-						 <input type="file">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">图片预览</label>
-					<div class="col-sm-10">
+						 <input type="file" id="myFile" name="myFile">
 					</div>
 				</div>
 				<div class="form-group">
@@ -129,17 +124,17 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4>案例展示</h4>
 			</div>
-			<form class="form-horizontal">
+			<form class="form-horizontal" enctype="multipart/form-data" id="addForm" method="post" action="">
 				<div class="form-group">
 					<label class="col-sm-2 control-label">标题</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="title" placeholder="标题">
+						<input type="text" class="form-control" id="title" placeholder="标题" name='title'>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">内容</label>
 					<div class="col-sm-10">
-						<textarea class="form-control" id='content'>
+						<textarea class="form-control" id='content' name='content'>
 							
 						</textarea>
 					</div>
@@ -147,10 +142,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">图片</label>
 					<div class="col-sm-10">
-						 <input type="file" id="uploadimg">
-					</div>
-					<div class='col-sm-12'>
-						<input type="text" class="form-control" id="img" placeholder="图片">
+						 <input type="file" id="uploadimg" name="myFile">
 					</div>
 				</div>
 				<div class="form-group">
@@ -230,7 +222,8 @@
 		loadlist();
 		$('#ok').click(function(){
 			var id=$('.change_news_id').html();
-			$.ajax({
+			$("#editForm").attr('action', '/admin/news/'+id+'.json').submit();
+			/*$.ajax({
 				url: '/admin/news/'+id+'.json',
 				type:"put",
 				dataType:"json",
@@ -238,13 +231,14 @@
 				success:function(data){
 					console.log(data);
 				}
-			});
+			});*/
 		});
 		$('#quxiao').click(function(){			
 			$('.close').click()
 		})
 		$('#create').click(function(){
-			var param = {
+			$('#addForm').attr('action', '/admin/news/create.json').submit();
+			/*var param = {
 				'name':$('#title').val(),
 				'content':$('#content').val(),
 				'pic':$('#img').val(),
@@ -265,7 +259,7 @@
 						alert('创建失败');
 					}
 				}
-			});
+			});*/
 		})
 	})
 </script>
