@@ -56,6 +56,7 @@ class UserService {
 						$updData['password'] = $this->hasher->make($params['newPasswd']);
 						$isUpdate = User::where('username', $this->username)->update($updData);
 						if($isUpdate) {
+							Auth::logout();
 							return array('status' => true, 'result' => '修改成功');
 						} else {
 							return array('status' => false, 'result' => '修改失败');
