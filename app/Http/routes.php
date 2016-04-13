@@ -56,7 +56,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 
     //新闻
     Route::post('news/create.json', 'NewsController@postNews');
-    Route::put('news/{id}.json', 'NewsController@putNews');
+    Route::post('news/{id}.json', 'NewsController@putNews');
     Route::delete('news/{id}.json', 'NewsController@delNews');
 
     //公司信息
@@ -69,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function()
 
     //案例
     Route::post('case/create.json', 'AnliController@postAnli');
-    Route::put('case/{id}.json', 'AnliController@putAnli');
+    Route::post('case/{id}.json', 'AnliController@updateAnli');
     Route::delete('case/{id}.json', 'AnliController@delAnli');
 });
 

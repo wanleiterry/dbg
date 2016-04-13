@@ -49,20 +49,33 @@ class NewsService {
         }
     }
 
-    public function put($id, $params)
+    public function updateNews($id, $params)
     {
     	$upd = array();
     	if(isset($params['title'])) {
     		$upd['title'] = $params['title'];
     	}
-    	if(isset($params['pic'])) {
-    		$upd['pic'] = $params['pic'];
-    	}
+//     	if(isset($params['pic'])) {
+//     		$upd['pic'] = $params['pic'];
+//     	}
     	if(isset($params['content'])) {
     		$upd['content'] = $params['content'];
     	}
     	if(isset($params['desc'])) {
     		$upd['desc'] = $params['desc'];
+    	}
+    	if(isset($params['myFile'])) {
+    		$file = $params['myFile'];
+    		if($file->isValid()) {
+    			$targetFolder = env('PIC_DOMAIN');
+    			$extension = $file->getClientOriginalExtension();
+    			$newName = str_random(8).$extension;
+    			if($file->move('uploads/pictures', $newName)) {
+    				$upd['pic'] = $newName;
+    			}
+    		} else {
+    			return array('status' => false, 'result' => '所上传的文件无效');
+    		}
     	}
         if(News::where('id', $id)->update($upd)) {
             return array('status' => true);

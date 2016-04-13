@@ -59,7 +59,7 @@ class AnliService {
 		}
     }
 
-    public function put($id, $params)
+    public function updateAnli($id, $params)
     {
     	$upd = array();
     	if(isset($params['title'])) {
@@ -68,11 +68,24 @@ class AnliService {
     	if(isset($params['category_id'])) {
     		$upd['category_id'] = $params['category_id'];
     	}
-    	if(isset($params['pic'])) {
-    		$upd['pic'] = $params['pic'];
-    	}
+//     	if(isset($params['pic'])) {
+//     		$upd['pic'] = $params['pic'];
+//     	}
     	if(isset($params['content'])) {
     		$upd['content'] = $params['content'];
+    	}
+    	if(isset($params['myFile'])) {
+    		$file = $params['myFile'];
+    		if($file->isValid()) {
+    			$targetFolder = env('PIC_DOMAIN');
+    			$extension = $file->getClientOriginalExtension();
+    			$newName = str_random(8).$extension;
+    			if($file->move('uploads/pictures', $newName)) {
+    				$upd['pic'] = $newName;
+    			}
+    		} else {
+    			return array('status' => false, 'result' => '所上传的文件无效');
+    		}
     	}
 		if($this->model->where('id', $id)->update($upd)) {
 			return array('status' => true);

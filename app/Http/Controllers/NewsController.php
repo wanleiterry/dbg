@@ -31,9 +31,12 @@ class NewsController extends Controller {
         return Response::json($result, 200);
     }
 
-    public function putNews($id, Request $request)
+    public function updateNews($id, Request $request)
     {
-        $result = $this->newsService->put($id, $request->all());
+        $result = $this->newsService->updateNews($id, $request->all());
+        if($result['status']) {
+        	return Redirect::to('/admin/news_list.html');
+        }
         return Response::json($result, 200);
     }
 
