@@ -28,7 +28,11 @@ class AnliController extends Controller {
     public function postAnli(Request $request)
     {
         $result = $this->anliService->post($request->all());
-        return Response::json($result, 200);
+//         return Response::json($result, 200);
+        if($result['status']) {
+        	return Redirect::to('/admin/case_list.html');
+        }
+        return Redirect::to('/admin/404.html?error=' . $result['result']);
     }
 
     public function updateAnli($id, Request $request)

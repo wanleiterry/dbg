@@ -39,9 +39,22 @@ class NewsService {
             return array('status' => false, 'result' => '参数错误');
         }
         $ins['title'] = $params['title'];
-        $ins['pic'] = isset($params['pic']) ? $params['pic'] : '';
+//         $ins['pic'] = isset($params['pic']) ? $params['pic'] : '';
         $ins['content'] = isset($params['content']) ? $params['content'] : '';
         $ins['desc'] = isset($params['desc']) ? $params['desc'] : '';
+        if(isset($params['myFile'])) {
+        	$file = $params['myFile'];
+        	if($file->isValid()) {
+        		$targetFolder = env('PIC_DOMAIN');
+        		$extension = $file->getClientOriginalExtension();
+        		$newName = str_random(8).$extension;
+        		if($file->move('uploads/pictures', $newName)) {
+        			$ins['pic'] = $newName;
+        		}
+        	} else {
+        		return array('status' => false, 'result' => '所上传的文件无效');
+        	}
+        }
         if(News::create($ins)) {
             return array('status' => true);
         } else {

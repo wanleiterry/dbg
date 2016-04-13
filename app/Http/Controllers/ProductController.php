@@ -29,7 +29,11 @@ class ProductController extends Controller {
     public function postProduct(Request $request)
     {
         $result = $this->productService->post($request->all());
-        return Response::json($result, 200);
+//         return Response::json($result, 200);
+        if($result['status']) {
+        	return Redirect::to('/admin/product_list.html');
+        }
+        return Redirect::to('/admin/404.html?error=' . $result['result']);
     }
 
     public function updateProduct($id, Request $request)
@@ -40,7 +44,8 @@ class ProductController extends Controller {
 //         	return view()->file('/admin/product_list.html');
         	return Redirect::to('/admin/product_list.html');
         }
-        return Response::json($result, 200);
+//         return Response::json($result, 200);
+        return Redirect::to('/admin/404.html?error=' . $result['result']);
     }
 
     public function delProduct($id) {
