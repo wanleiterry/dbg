@@ -10,7 +10,6 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Response;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -108,7 +107,9 @@ class AuthController extends Controller
     }
     
     public function getLogout() {
+//     	dd(Auth::logout());
+//     	return redirect()->guest('auth/login');
     	Auth::logout();
-    	return redirect()->guest('auth/login');
+    	return Response::json(['success'=>true], 200);
     }
 }
