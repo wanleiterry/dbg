@@ -40,7 +40,8 @@
 				    					共有<span class="total_num"></span>条数据
 				    				</div>
 				    				<div class="pull-right">
-				    					<nav>
+				    					<div class="tcdPageCode"></div>
+				    					<!-- <nav>
 		                                    <ul class="pagination">
 		                                        <li class="disabled">
 		                                            <a href="#" aria-label="Previous">
@@ -58,7 +59,7 @@
 		                                            </a>
 		                                        </li>
 		                                    </ul>
-		                                </nav>
+		                                </nav> -->
 				    				</div>
 				    				<div class="clearfix"></div>
 				    			</td>
@@ -179,6 +180,7 @@
 </body>
 <script type="text/javascript" src="/js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script src="http://www.lanrenzhijia.com/ajaxjs/jquery.page.js"></script>
 <script type="text/javascript">$("#header").load("/admin/header.html");</script>
 <script type="text/javascript">$("#left").load("/admin/left.html");</script>
 <script>
@@ -238,7 +240,14 @@
 		})
 	}
 	$(function(){
-		loadlist();		
+		loadlist();	
+	    $(".tcdPageCode").createPage({
+	        pageCount:6,
+	        current:1,
+	        backFn:function(p){
+	            console.log(p);
+	        }
+	    });
 		$('#create').click(function(){
 			$('#addForm').attr('action', '/admin/product/create.json').submit();
 			/*var param = {
