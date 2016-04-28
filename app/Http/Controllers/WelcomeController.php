@@ -32,7 +32,7 @@ class WelcomeController extends Controller {
 	{
 // 		return view('index');
 		\View::addExtension('html', 'php');
-		return view()->file('/html/index.html');
+		return view()->file('index.html');
 	}
 
 }
