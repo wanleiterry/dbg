@@ -22,10 +22,7 @@
 						<a href="about.html" class="pull-right">更多></a>
 						<div class="clearfix"></div>
 					</div>
-					<div class="introduce_main">
-			        	<div class="company_info">
-					        <p>台州亿恒装饰——是浙江知名的装饰材料生产商。始创于90年代初，是一家集设计、生产、施工于一体的多元化公司。本公司拥有一支超强的团队，精湛的技术，犹如鬼斧神工，雕刻出一幅幅栩栩如生的艺术。亿恒公司不仅是中国GRC协会的会员单位、中国建筑装饰协会的会员单位、而且在业内率先通过ISO9001:2008国际质量管理体系认证，荣膺“全国GRC产品30家市场放心品牌”称号，并应邀参加上海世博会民企联合馆活动，享誉中外。 </p>
-				        </div>
+					<div class="introduce_main" id='company_info'>
 					</div>
 				</div>
 				<div class="product">
@@ -85,33 +82,43 @@
             }
         })
     }	
-	$.ajax({
-        url: '/company.json',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-            $('.introduce_main .company-info h3').html(''+data.name+'');
-            $('.introduce_main .company-info p').html(''+data.desc+'');
-        }
-    });
-    $.ajax({
-        url: '/case/list.json?limit=8&offset=0',
-        type: "get",
-        dataType: "json",
-        data: '',
-        success: function(data){
-            var json=data.data;
-            var str='';
-			for(var i=0;i<json.length;i++){
-				str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-				str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
-				str+='<img src="'+json[i].pic+'" alt="...">';
-				str+='<div class="caption"><p class="text-center">'+json[i].title+'</p>';
-				str+='</div></div></div>';
-			}
-			$('.product_new').html(str);
-        }
-    });
+    function loadcompany(){        
+        $.ajax({
+            url: '/company.json',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                var str='';
+                str+='<div class="company_info">';
+                str+='<h3>'+data.name+'</h3>';
+                str+='<p>'+data.desc+'</p>';
+                str+='</div>';
+                $('.introduce_main').html(str);
+            }
+        });
+    }
+    function loadsupply(){        
+        $.ajax({
+            url: '/case/list.json?limit=8&offset=0',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                var json=data.data;
+                var str='';
+                for(var i=0;i<json.length;i++){
+                    str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+                    str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
+                    str+='<img src="'+json[i].pic+'" alt="...">';
+                    str+='<div class="caption"><p class="text-center">'+json[i].title+'</p>';
+                    str+='</div></div></div>';
+                }
+                $('.product_new').html(str);
+            }
+        });
+    }
+    loadcompany();
+    loadsupply();
 </script>
 </html>
