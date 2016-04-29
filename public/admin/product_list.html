@@ -39,27 +39,7 @@
 				    				<div class="pull-left">
 				    					共有<span class="total_num"></span>条数据
 				    				</div>
-				    				<div class="pull-right">
-				    					<div class="tcdPageCode"></div>
-				    					<!-- <nav>
-		                                    <ul class="pagination">
-		                                        <li class="disabled">
-		                                            <a href="#" aria-label="Previous">
-		                                                <span aria-hidden="true">«</span>
-		                                            </a>
-		                                        </li>
-		                                        <li class="active"><a href="#">1</a></li>
-		                                        <li><a href="#">2</a></li>
-		                                        <li><a href="#">3</a></li>
-		                                        <li><a href="#">4</a></li>
-		                                        <li><a href="#">5</a></li>
-		                                        <li>
-		                                            <a href="#" aria-label="Next">
-		                                                <span aria-hidden="true">»</span>
-		                                            </a>
-		                                        </li>
-		                                    </ul>
-		                                </nav> -->
+				    				<div class="pull-right" id='pagination'>
 				    				</div>
 				    				<div class="clearfix"></div>
 				    			</td>
@@ -184,14 +164,37 @@
 <script type="text/javascript">$("#header").load("/admin/header.html");</script>
 <script type="text/javascript">$("#left").load("/admin/left.html");</script>
 <script>
-	function loadlist(){
+	var $rows='';
+	function loadlist(pagenum){
+		if(pagenum==undefined){
+			pagenum=0;
+		}
 		$.ajax({
-			url:'/product/list.json?limit=8&offset=0',
+			url:'/product/list.json?limit=10&offset='+pagenum+'',
 			type: "get",
 			dataType: "json",
 			data: '',
 			success: function(data){
 				$('.total_num').html(''+data._count+'');
+				$rows=Math.ceil(parseInt(data._count)/10);
+				var _page='';
+				if($rows==1){
+					$("#pagination").hide();
+				}
+				else{
+					_page+='<nav><ul class="pagination">';
+					_page+='<li><a href="#" aria-label="Previous" onclick="gopages(1)"><span aria-hidden="true">&laquo;</span></a></li>';
+					for(var i=1;i<$rows+1;i++){
+						var activeli=parseInt(pagenum)+1;
+						if(i==activeli){
+							_page+='<li class="active"><a onclick="gopages(this.text)">'+i+'</a></li>';
+						}
+						else{
+							_page+='<li><a onclick="gopages(this.text)">'+i+'</a></li>';
+						}
+					}
+					_page+='<li><a href="#" aria-label="Next" onclick="gopages($rows)"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>';
+				}
 				var json=data.data;
 				var str='';
 				for(var i=0;i<json.length;i++){
@@ -203,8 +206,13 @@
 					str+='<span>|</span><a class="delete" onclick="delnews('+json[i].id+')">删除</a></p></td></tr>';
 				}
 				$('#goods-list').html(str);
+				$('#pagination').html(_page);
 			}
 		});
+	}
+	function gopages(page){
+		var newpage=parseInt(page)-1;
+		loadlist(newpage);
 	}
 	function delnews(id){
 		if(window.confirm('你确定要删除选中的产品吗？')){
@@ -250,23 +258,6 @@
 	    });
 		$('#create').click(function(){
 			$('#addForm').attr('action', '/admin/product/create.json').submit();
-			/*var param = {
-				'name':$('#add_title').val(),
-				'desc':$('#add_desc').val(),
-				'pic':$('#add_img').val(),
-				'content':$('#add_content').val()
-			}
-			$.ajax({
-				url: '/admin/product/create.json',
-				type:"post",
-				dataType:"json",
-				data:param,
-				success:function(data){
-					console.log(data);
-					$('.close').click()
-					loadlist();
-				}
-			});*/
 		});
 		$("#quxiao").click(function(){
 			$(".close").click();
@@ -277,31 +268,10 @@
 		$('#ok').click(function(){
 			var id=$('.change_product_id').html();
 			$("#editForm").attr('action', '/admin/product/'+id+'.json').submit();
-			/*var param = {
-				'name':$('#title').val(),
-				'desc':$('#desc').val(),
-				//'pic':$('#img').val(),
-				'pic':$('#myFile').val(),
-				'content':$('#content').val()
-			}
-			$.ajax({
-				url: '/admin/product/'+id+'.json',
-				type:"put",
-				dataType:"json",
-				data:param,
-				success:function(data){
-					console.log(data);
-					if(data.status==true){
-						$(".close").click();
-						loadlist();
-					}
-					else{
-						alert('修改失败！！');
-					}
-				}
-			});*/
-			
 		});
+		$('#pagination li').click(function(){
+			alert(11);
+		})
 	})
 </script>
 </html>

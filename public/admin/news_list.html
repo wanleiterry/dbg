@@ -42,7 +42,7 @@
 				    				<div class="pull-left">
 				    					共有<span class="total_num"></span>条数据
 				    				</div>
-				    				<div class="pull-right">
+				    				<div class="pull-right" id='pagination'>
 				    					<nav>
 		                                    <ul class="pagination">
 		                                        <li class="disabled">
@@ -180,6 +180,7 @@
 <script type="text/javascript">$("#header").load("/admin/header.html");</script>
 <script type="text/javascript">$("#left").load("/admin/left.html");</script>
 <script>	
+	var $rows='';
 	function deletenews(id){
 		if(window.confirm('你确定要删除选中的产品吗？')){
 			//alert("确定");
@@ -214,13 +215,36 @@
             }
         })
 	}
-	function loadlist(){
+	function loadlist(pagenum){
+		if(pagenum==undefined){
+			pagenum=0;
+		}
 		$.ajax({
-			url:'/news/list.json',
+			url:'/news/list.json?limit=1&offset='+pagenum+'',
 			type: "get",
 			dataType: "json",
 			data: '',
 			success: function(data){
+				$('.total_num').html(''+data._count+'');
+				$rows=Math.ceil(parseInt(data._count)/1);
+				var _page='';
+				if($rows==1){
+					$("#pagination").hide();
+				}
+				else{
+					_page+='<nav><ul class="pagination">';
+					_page+='<li class="disabled"><a href="#" aria-label="Previous" onclick="gopages(1)"><span aria-hidden="true">&laquo;</span></a></li>';
+					for(var i=1;i<$rows+1;i++){
+						var activeli=parseInt(pagenum)+1;
+						if(i==activeli){
+							_page+='<li class="active"><a onclick="gopages(this.text)">'+i+'</a></li>';
+						}
+						else{
+							_page+='<li><a onclick="gopages(this.text)">'+i+'</a></li>';
+						}
+					}
+					_page+='<li><a href="#" aria-label="Next" onclick="gopages($rows)"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>';
+				}
 				var json=data.data;
 				var str='';
 				for(var i=0;i<json.length;i++){
@@ -232,8 +256,13 @@
 					str+='<span>|</span><a class="deletenews" onclick="deletenews('+json[i].id+')">删除</a></p></td></tr>';
 				}
 				$('#goods-list').html(str);
+				$('#pagination').html(_page);
 			}
 		});
+	}
+	function gopages(page){
+		var newpage=parseInt(page)-1;
+		loadlist(newpage);
 	}
 	$(function(){	
 		loadlist();

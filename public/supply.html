@@ -31,7 +31,7 @@
                             <div class="pull-left record">
                                 <p>共<span id='total'>236</span>条记录</p>
                             </div>
-                            <div class="pull-right">
+                            <div class="pull-right" id='pagination'>
                                 <nav>
                                     <ul class="pagination">
                                         <li class="disabled">
@@ -89,6 +89,7 @@
 <script type="text/javascript">$("#left").load("left.html");</script>
 <script type="text/javascript">$("#bottom").load("bottom.html");</script>
 <script>
+    var $rows='';
     function showdetail(id){
         $.ajax({
             url:'/product/'+id+'.json',
@@ -104,7 +105,56 @@
             }
         })
     }
+    function loadsupply(pagenum){     
+        if(pagenum==undefined){
+            pagenum=0;
+        }   
+        $.ajax({
+            url: '/product/list.json?limit=10&offset='+pagenum+'',
+            type: "get",
+            dataType: "json",
+            data: '',
+            success: function(data){
+                $('#total').html(''+data._count+'');
+                $rows=Math.ceil(parseInt(data._count)/10);
+                var _page='';
+                if($rows==1){
+                    $("#pagination").hide();
+                }
+                else{
+                    _page+='<nav><ul class="pagination">';
+                    _page+='<li class="disabled"><a href="#" aria-label="Previous" onclick="gopages(1)"><span aria-hidden="true">&laquo;</span></a></li>';
+                    for(var i=1;i<$rows+1;i++){
+                        var activeli=parseInt(pagenum)+1;
+                        if(i==activeli){
+                            _page+='<li class="active"><a onclick="gopages(this.text)">'+i+'</a></li>';
+                        }
+                        else{
+                            _page+='<li><a onclick="gopages(this.text)">'+i+'</a></li>';
+                        }
+                    }
+                    _page+='<li><a href="#" aria-label="Next" onclick="gopages($rows)"><span aria-hidden="true">&raquo;</span></a></li></ul></nav>';
+                }
+                var json=data.data;
+                var str='';
+                for(var i=0;i<json.length;i++){
+                    str+='<div class="col-md-3 col-sm-3 col-xs-6">';
+                    str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
+                    str+='<img src="'+json[i].pic+'">';
+                    str+='<div class="caption">';
+                    str+='<h4>'+json[i].name+'</h4><p class="text-center">'+json[i].desc+'</p></div></div></div>';
+                }
+                $("#supply_list").html(str);
+                $('#pagination').html(_page);
+            }
+        }); 
+    }
+    function gopages(page){
+        var newpage=parseInt(page)-1;
+        loadsupply(newpage);
+    }
     $(function () {
+        loadsupply();
         $.ajax({
             url:'/cate/list.json',
             type: "get",
@@ -118,26 +168,6 @@
                 $('#product_type').html(str)
             }
         })
-        $.ajax({
-            url: '/product/list.json?limit=10&offset=0',
-            type: "get",
-            dataType: "json",
-            data: '',
-            success: function(data){
-                console.log(data);
-                $('#total').html(''+data._count+'');
-                var json=data.data;
-                var str='';
-                for(var i=0;i<json.length;i++){
-                    str+='<div class="col-md-3 col-sm-3 col-xs-6">';
-                    str+='<div class="thumbnail" data-toggle="modal" data-target=".detail" onclick="showdetail('+json[i].id+')">';
-                    str+='<img src="'+json[i].pic+'">';
-                    str+='<div class="caption">';
-                    str+='<h4>'+json[i].name+'</h4><p class="text-center">'+json[i].desc+'</p></div></div></div>';
-                }
-                $("#supply_list").html(str);
-            }
-        }); 
     })
 </script>
 </html>

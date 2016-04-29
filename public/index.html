@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>宁波天欧装饰有限公司</title>
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
@@ -78,7 +78,6 @@
             dataType: "json",
             data: '',
             success: function(data){
-                console.log(data);
                 $('.title').html(''+data.name+'');
                 $('.panel-heading .time').html(''+data.created_at+'');
                 $('.panel-body img').attr("src",""+data.pic+"");
@@ -102,7 +101,6 @@
         dataType: "json",
         data: '',
         success: function(data){
-        	console.log(data);
             var json=data.data;
             var str='';
 			for(var i=0;i<json.length;i++){
