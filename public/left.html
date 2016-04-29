@@ -31,7 +31,11 @@
         </ul>
         <ul class="list-unstyled product_type"></ul>
   	</div>
-    <div id="allmap"></div>
+    <div id="allmap">
+        <a target="_blank" href="http://api.map.baidu.com/geocoder?address=宁波鄞州区高桥镇岐阳村&amp;output=html&amp;src=yourCompanyName">
+            <span class="glyphicon glyphicon-map-marker"></span>公司地址
+        </a>
+    </div>
 </div>
 <script>    
     $.ajax({
@@ -47,10 +51,4 @@
             $('.product_type').html(str);
         }
     })
-</script>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=s2UF8aKlKa9k8g3tvtXtDxoRNK0LsLmY"></script>
-<script type="text/javascript">
-    // 百度地图API功能
-    var map = new BMap.Map("allmap");  // 创建Map实例
-    map.centerAndZoom("宁波鄞州区高桥镇岐阳村",15);      // 初始化地图,用城市名设置地图中心点
 </script>
