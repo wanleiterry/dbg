@@ -50,7 +50,6 @@ class AnliService {
 		}
 		$ins['title'] = $params['title'];
 		$ins['category_id'] = $params['category_id'];
-// 		$ins['pic'] = isset($params['pic']) ? $params['pic'] : '';
 		$ins['content'] = isset($params['content']) ? $params['content'] : '';
 		if(isset($params['myFile'])) {
 			$file = $params['myFile'];
